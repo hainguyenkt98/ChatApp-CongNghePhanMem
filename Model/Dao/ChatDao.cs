@@ -267,6 +267,22 @@ namespace Model.Dao
                 }
             }
         }
+        public string getNameConversation(string conversationid, string userid)
+        {
+            using (ChatAppLQDataContext context = new ChatAppLQDataContext())
+            {
+                var conversation = context.tbConversations.Where(m => m.id.Trim() == conversationid).FirstOrDefault();
+                if((bool)conversation.isGroup == true)
+                {
+                    return conversation.name.Trim();
+                }
+                else
+                {
+                    var us = context.tbUsers.Where(m => m.id.Trim() == userid).FirstOrDefault();
+                    return us.nameshow.Trim();
+                }
+            }
+        }
     }
 }
 

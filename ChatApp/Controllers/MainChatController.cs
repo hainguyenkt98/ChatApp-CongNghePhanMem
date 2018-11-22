@@ -29,7 +29,7 @@ namespace ChatApp.Controllers
             totalMDC.ListFriendInfo = lstfriF;
             totalMDC.UserLogin = userLogin;
             totalMDC.ListChatLogInfo = lstChatLog;
-            return View(totalMDC);            
+            return View(totalMDC);
         }
         [HttpPost]
         public JsonResult GetListMessage(string conversationID)
@@ -60,6 +60,11 @@ namespace ChatApp.Controllers
         {
             UserLogin usLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
             chatDao.setConversationRead(conversationid, usLogin.Id);
+        }
+        public JsonResult GetNameConversation(string conversationid, string userid)
+        {
+            string conversationName = chatDao.getNameConversation(conversationid, userid);
+            return Json(conversationName, JsonRequestBehavior.AllowGet);
         }
     }
 }

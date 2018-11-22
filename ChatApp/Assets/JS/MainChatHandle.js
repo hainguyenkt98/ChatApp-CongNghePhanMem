@@ -85,6 +85,7 @@
     $(document).on("click", ".online-list li .onlineitem", function () {
         var conversationID = $(this).data('conversationid');
         var conversationname = $(this).find('.desc h5').text();
+        nameconversation = $(this).find('.desc h5').text();
 
         conversationidcurrent = $(this).data('conversationid');
         isGroup = false;
@@ -169,11 +170,13 @@
     //Bat su kien offline friend
 
     chat.client.SendMessage = function (content, userid, conversationid) {
+        var presentConversationName = "";
         var usersendmessage = setCurrentPathImage(userid);
         pathImageSender = usersendmessage.PathImage;
         var element = $(".chatList[data-conversationid$=" + conversationid + "]");
 
-        nameconversation = element.find('.desc h5').text();
+        presentConversationName = getNameConversation(conversationid, userid);
+        //Set lai name conversation khi tin nhan chua co trong lich su
 
         if (conversationid == conversationidcurrent) {
 
@@ -191,13 +194,16 @@
             $('#messagecontent').val("");
             scrollBottom();
 
+
+
+
             resetConversation(conversationid, content, isGroup, pathImageSender, nameconversation, true);
             setComversationReaded(conversationid);
             //setUnreadOnlineList(conversationid, content, isGroup, pathImageSender, nameconversation);
 
         } else {
             //Khong phai dang noi chuyen thong bao 2 ben kia
-            resetConversation(conversationid, content, isGroup, pathImageSender, nameconversation, false);
+            resetConversation(conversationid, content, isGroup, pathImageSender, presentConversationName, false);
         }
     };
 
@@ -267,6 +273,7 @@ function setCurrentPathImage(userid) {
 }
 
 function resetConversation(conversationid, contents, isGroup, pathImageSender, nameconversation, readstatus) {
+
     var lastmessage = "";
     if (contents.length > 20) {
         lastmessage = contents.substr(0, 10);
@@ -348,4 +355,20 @@ function setReadOnlineList(conversationid) {
 }
 function setReadConversation(conversationid) {
     var element = $(".chatList[data-conversationid$=" + conversationid + "]").find('.desc small.mess-unread').removeClass('mess-unread').addClass('mess-readed');
+}
+
+function getNameConversation(conversationid, userid) {
+    var nameConversation = "";
+    $.ajax(
+        {
+            async: false,
+            url: "/MainChat/GetNameConversation",
+            data: { conversationid: conversationid, userid: userid },
+            dataType: "json",
+            type: "post",
+            success: function (result) {
+                nameConversation = result;
+            }
+        });
+    return nameConversation;
 }
