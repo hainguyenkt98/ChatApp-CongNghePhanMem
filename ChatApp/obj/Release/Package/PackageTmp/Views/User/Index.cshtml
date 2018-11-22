@@ -1,0 +1,70 @@
+﻿@model ChatApp.Models.LoginModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Assets/JS/bootstrap.min.js"></script>
+    <link href="~/Assets/CSS/layout.css" rel="stylesheet" />
+    <link href="~/Assets/Fontawesome/css/all.min.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <div class="header">
+            <div class="header-inner">
+                <span id="slogan">Miễn phí cho đến khi phải trả phí</span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6 ">
+                    <div class="logo-body column-in-center">
+                        <img class="logo" src="~/Images/logo.png">
+                    </div>
+                </div>
+                <div class="col-sm-3"></div>
+            </div>
+        </div>
+        <div class="web-body">
+            <div class="reg-form">
+                @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                {
+                    @Html.ValidationSummary(false, "", "error");
+                    <form action="/action_page.php">
+                        <div class="form-group has-feedback">
+                            <span class="form-control-feedback"><i class="fas fa-user"></i></span>
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Tên tài khoản" })
+                        </div>
+                        <div class="form-group has-feedback">
+                            <span class="form-control-feedback"><i class="fas fa-lock"></i></span>
+                            @Html.PasswordFor(m => m.PassWord, new { @class = "form-control", @placeholder = "Mật khẩu" })
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="btn-signin">Đăng nhập</button>
+                        <div class="form-bottom">
+                            <span>
+                                <a href="HTML/sign-up.html">Đăng ký</a>
+                            </span>
+                            <span style="float: right;">
+                                <a href="#">Quên mật khẩu?</a>
+                            </span>
+                        </div>
+                    </form>
+                }
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-inner">
+                Copyright © HKT Chat <br>
+                Đơn vị chủ quản: HKT Corporation.
+            </div>
+        </div>
+    </div>
+</body>
+</html>

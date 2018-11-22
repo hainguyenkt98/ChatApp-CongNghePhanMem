@@ -1,0 +1,106 @@
+﻿@model ChatApp.Models.ProfileModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <link href="~/Assets/CSS/profile.css" rel="stylesheet" />
+    <script src="~/Assets/JS/profile.js"></script>
+    <script src="~/Assets/JS/bootstrap-datepicker.js"></script>
+    <link href="~/Assets/CSS/datepicker.css" rel="stylesheet" />
+    @*<script src="~/Assets/JS/bootstrap-3.3.5.min.js"></script>
+        <link href="~/Assets/CSS/bootstrap-3.3.5.min.css" rel="stylesheet" />*@
+
+}
+@section userinfo
+{
+    <div class="user-pic">
+        <img class="img-responsive img-rounded" src="@Model.Pathimage" alt="User picture">
+    </div>
+    <div class="user-info">
+        <span class="user-name">
+            @Model.Nameshow.Trim()
+        </span>
+        @if (Model.Role.Trim() == "admin")
+        {
+            <span class="user-role">Quản trị viên</span>
+        }
+        else
+        {
+            <span class="user-role">Người dùng</span>
+        }
+        <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Đang hoạt động</span>
+        </span>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-3 left-profile">
+        <!--left col-->
+        <div class="text-center"><h1>@Model.Nameshow.Trim()</h1></div>
+        <div class="text-center">
+            @if (Model.Pathimage.Trim() == "" || Model.Pathimage == null)
+            {
+                <img id="pictureUpload" src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png" class="avatar img-circle img-thumbnail" alt="avatar">
+            }
+            else
+            {
+                <img id="pictureUpload" src="@Model.Pathimage" class="avatar img-circle img-thumbnail" alt="avatar">
+            }         
+        </div>
+        <div class="text-center updateImage">
+            <input placeholder="Chọn hình ảnh" type="text" name="picture" id="picture" class="form-control" style="display:none;" />
+            <input type="file" id="fileUpload" name="fileUpload" style="display:none;" class="text-center center-block file-upload" />
+            <input value="Chọn ảnh" type="button" id="btnUpload" class="btn btn-success" />
+        </div>
+    </div><!--/col-3-->
+
+    <div class="col-sm-4 right-profile">
+        <div class="tab-content">
+            <form class="form" action="##" method="post" id="registrationForm">
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="last_name"> <h3>Tên</h3></label>
+                        <input value="@Model.Nameshow" type="text" class="form-control" name="nameshow" id="nameshow" title="Nhập vào tên của bạn">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="email"> <h3>Email</h3></label>
+                        <input value="@Model.Email" type="email" class="form-control" name="email" id="email" title="enter your email.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="birth"> <h3>Ngày sinh</h3></label>
+                        <div id="datepicker" class="input-group date" data-date-format="dd/mm/yyyy">
+                            <input id="birthdate" value="@Model.Birth.ToShortDateString()" class="form-control" readonly="" type="text"> <span class="input-group-addon"><i class="fas fa-calendar-alt"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-6">
+                        <label for="password"> <h3>Password</h3></label>
+                        <input value="@Model.Pasword" type="text" class="form-control" name="password" id="password" title="enter your password.">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <br>
+                        <button class="btn btn-success btn-save"> Lưu</button>
+                        <button class="btn btn-cancel">Hủy</button>
+                    </div>
+                </div>
+            </form>
+        </div> <!-- tab-content -->
+    </div><!--/col-9-->
+    <div class="col-sm-3"></div>
+</div>	<!-- row -->	

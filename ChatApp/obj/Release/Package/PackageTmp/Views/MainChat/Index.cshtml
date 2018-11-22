@@ -1,0 +1,140 @@
+﻿@model ChatApp.Models.TotalModelChat
+
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts
+{
+    <script src="~/Assets/JS/MainChatHandle.js"></script>
+    <link href="~/Assets/CSS/chatfriend.css" rel="stylesheet" />
+    <script src="~/Assets/JS/chatfriend.js"></script>
+}
+
+@section userinfo
+{
+    <div class="user-pic">
+        <img class="img-responsive img-rounded" src="~/Images/img-profile.png" alt="User picture">
+    </div>
+    <div class="user-info">
+        <span class="user-name">
+            @Model.UserLogin.Nameshow.Trim()
+        </span>
+        @if (Model.UserLogin.Role.Trim() == "admin")
+        {
+            <span class="user-role">Quản trị viên</span>
+        }
+        else
+        {
+            <span class="user-role">Người dùng</span>
+        }
+        <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Đang hoạt động</span>
+        </span>
+    </div>
+}
+<div class="row row-function">
+    <!-- Chat form -->
+    <div class="onlinechat">
+        <div class="header-online">
+            <h5>Người dùng online</h5>
+        </div>
+
+        <div class="body-online-list">
+            <!-- DE DO TOI TAO VIET TIEP -->
+            <div class="online-list mCustomScrollbar" data-mcs-theme="minimal-dark">
+                <ul>
+                    @foreach (var item in Model.ListFriendInfo)
+                    {                    
+                        <li>
+                            <div class="onlineitem" data-conversationid="@item.Conversationid.Trim()" data-connectionid="@item.Connectionid.Trim()" data-userid="item.Id.Trim()">
+                                <div class="img">
+                                    @if (item.Onlinestatus == true)
+                                    {
+                                        <i class="fa fa-circle online"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-circle offline"></i>   
+                                    }
+                                    <img src="~/Images/img-friend.png">
+                                </div>
+                                <div class="desc">
+                                    <h5>@item.Nameshow.Trim()</h5>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- end body online -->
+    </div>
+    <!-- end online list -->
+
+    <div class="main-chat">
+        <div class="head-chat">
+            <div class="headLeft-chat">
+                <div class="headLeft-sub">
+                    <!-- <input type="text" name="search" placeholder="Search...">
+                    <button> <i class="fa fa-search"></i> </button> -->
+                    <h5>Lịch sử trò chuyện</h5>
+                </div>
+            </div>
+            <div class="headRight-chat">
+                <div class="headRight-sub">
+                    <h3></h3>
+                    <small></small>
+                </div>
+            </div>
+        </div>
+        <div class="body-chat">
+            <div class="left-chat mCustomScrollbar" data-mcs-theme="minimal-dark">
+                <ul>
+                    @foreach (var item in Model.ListChatLogInfo)
+                    {
+                        <li>
+                            <div class="chatList" data-conversationid = @item.Conversationid.Trim()>
+                                <div class="img">
+                                    @if (item.Onlinestatus == true)
+                                    {
+                                        <i class="fa fa-circle online"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-circle offline"></i>
+                                    }
+                                    <img src="~/Images/img-friend.png">
+                                </div>
+                                <div class="desc">
+                                    <small class="time">@item.Lastmodified</small>
+                                    <h5>@item.Name.Trim()</h5>
+                                    <small class="mess-readed">@item.Lastmessage</small>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="right-chat">
+                <div class="message mCustomScrollbar" data-mcs-theme="minimal-dark">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                <div class="right-chat-bottom">
+                    <form>
+                        @*<div class="upload-btn">
+                            <button class="btn"><i class="fa fa-photo"></i></button>
+                            <input type="file" name="myfile" />
+                        </div>*@
+                        <input type="text" name="" placeholder="type here...">
+                        <button class="btn-send"><i class="fas fa-share-square"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End chat form -->
+</div>

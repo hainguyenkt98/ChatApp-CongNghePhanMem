@@ -1,0 +1,74 @@
+.logo
+ 		{
+ 			margin: 10px; 
+ 			border-radius: 50%;
+ 			display: block;
+ 		}
+ 		.Main
+ 		{
+ 			margin-left : 200px;
+ 			padding: 10px;
+ 			display: block;
+ 			text-transform: uppercase;
+ 			line-height: normal;
+		}
+		label 
+		{
+    		padding: 12px 12px 12px 0;
+    		display: inline-block;
+		}
+		input[type=text] 
+		{
+    		width: 100%;
+   			padding: 12px;
+    		border: 1px solid #ccc;
+    		border-radius: 4px;
+    		
+		}
+		form
+		{
+			margin-left: 200px;
+			padding: 10px;
+		}		
+		.col-25 
+		{
+			
+    		float: left;
+    		width: 25%;
+    		margin-top: 6px;
+
+		}
+
+		.col-75 {
+    		float: left;
+    		width: 75%;
+    		margin-top: 6px;
+		}
+		#after 
+		{
+			width: 47%;
+			padding-right: 20px;
+		}
+		#choose
+		{
+			    padding-top: 5px;
+   				text-align: right;
+    			clear: both;
+    			margin-left: 100px;
+    			padding: 20px;
+		}
+		#next
+		{
+			
+			margin-right : 20PX;
+		}
+		#code
+		{
+			font-size: 20px;
+			padding: 5px 5px;
+			
+		}
+		button#code
+		{
+			margin : 10px;
+		}

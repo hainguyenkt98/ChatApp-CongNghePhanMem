@@ -1,0 +1,7 @@
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Release\Model.dll.config
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Release\Model.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Release\Model.pdb
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Release\Model.csprojAssemblyReference.cache
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Release\Model.csproj.CoreCompileInputs.cache
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Release\Model.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Release\Model.pdb

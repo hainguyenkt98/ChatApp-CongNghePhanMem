@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="ChatApp" Class="ChatAppLQDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=171.244.10.49,1433\SQLEXPRESS;Initial Catalog=ChatApp;Persist Security Info=True;User ID=hai" SettingsObjectName="Model.Properties.Settings" SettingsPropertyName="ChatAppConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.tbAttachmment" Member="tbAttachmments">
+    <Type Name="tbAttachmment">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="data" Type="System.Data.Linq.Binary" DbType="Binary(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="filetype" Type="System.Data.Linq.Binary" DbType="Binary(50)" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="filedot" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="messageid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="tbMessage_tbAttachmment" Member="tbMessage" ThisKey="messageid" OtherKey="id" Type="tbMessage" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUser" Member="tbUsers">
+    <Type Name="tbUser">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="account" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="role" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Association Name="tbUser_tbConversation_User" Member="tbConversation_Users" ThisKey="id" OtherKey="userid" Type="tbConversation_User" />
+      <Association Name="tbUser_tbMessage" Member="tbMessages" ThisKey="id" OtherKey="userid" Type="tbMessage" />
+      <Association Name="tbUser_tbUser_Friend" Member="tbUser_Friends" ThisKey="id" OtherKey="user_id" Type="tbUser_Friend" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbConversation" Member="tbConversations">
+    <Type Name="tbConversation">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="creationtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="lasttimemodified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isGroup" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbConversation_tbConversation_User" Member="tbConversation_Users" ThisKey="id" OtherKey="conversationid" Type="tbConversation_User" />
+      <Association Name="tbConversation_tbMessage" Member="tbMessages" ThisKey="id" OtherKey="conversationid" Type="tbMessage" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbConversation_User" Member="tbConversation_Users">
+    <Type Name="tbConversation_User">
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="userid" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbUser_tbConversation_User" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
+      <Association Name="tbConversation_tbConversation_User" Member="tbConversation" ThisKey="conversationid" OtherKey="id" Type="tbConversation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbFriend" Member="tbFriends">
+    <Type Name="tbFriend">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="tbFriend_tbUser_Friend" Member="tbUser_Friends" ThisKey="id" OtherKey="friend_id" Type="tbUser_Friend" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbMessage" Member="tbMessages">
+    <Type Name="tbMessage">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="creationtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="contents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="userid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="tbMessage_tbAttachmment" Member="tbAttachmments" ThisKey="id" OtherKey="messageid" Type="tbAttachmment" />
+      <Association Name="tbUser_tbMessage" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
+      <Association Name="tbConversation_tbMessage" Member="tbConversation" ThisKey="conversationid" OtherKey="id" Type="tbConversation" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUser_Friend" Member="tbUser_Friends">
+    <Type Name="tbUser_Friend">
+      <Column Name="user_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbFriend_tbUser_Friend" Member="tbFriend" ThisKey="friend_id" OtherKey="id" Type="tbFriend" IsForeignKey="true" />
+      <Association Name="tbUser_tbUser_Friend" Member="tbUser" ThisKey="user_id" OtherKey="id" Type="tbUser" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.AddFriend" Method="AddFriend">
+    <Parameter Name="useridchudong" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="useridbidong" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UnFriend" Method="UnFriend">
+    <Parameter Name="useridchudong" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="useridbidong" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.AddUserToConversation" Method="AddUserToConversation">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.BlockFriend" Method="BlockFriend">
+    <Parameter Name="useridchudong" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="useridbidong" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.NewConversation" Method="NewConversation">
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="name" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="isgroup" Type="System.Boolean" DbType="Bit" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.UnBlockFriend" Method="UnBlockFriend">
+    <Parameter Name="useridchudong" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="useridbidong" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.funcBlockFriendList" Method="funcBlockFriendList" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcBlockFriendListResult">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="role" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcSeachFriendList" Method="funcSeachFriendList" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcSeachFriendListResult">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="role" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcCheckOnlineCS" Method="funcCheckOnlineCS" IsComposable="true">
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.funcConversationSMS" Method="funcConversationSMS" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcConversationSMSResult">
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="lasttimemodified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="isGroup" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcGetListFriend" Method="funcGetListFriend" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcGetListFriendResult">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcLastSMSConversation" Method="funcLastSMSConversation" IsComposable="true">
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcLastSMSConversationResult">
+      <Column Name="contents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="creationtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcMyNewID" Method="funcMyNewID" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.funcMyNewIDConversation" Method="funcMyNewIDConversation" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.funcMyNewIDFriend" Method="funcMyNewIDFriend" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.funcMyNewIDMessage" Method="funcMyNewIDMessage" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.funcMyNewIDUser" Method="funcMyNewIDUser" IsComposable="true">
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.funcOnlineStatusConversation" Method="funcOnlineStatusConversation" IsComposable="true">
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Boolean" />
+  </Function>
+  <Function Name="dbo.updateProfile" Method="updateProfile">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="pathImage" Type="System.String" DbType="NChar(50)" />
+    <Parameter Name="nameshow" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="email" Type="System.String" DbType="NChar(30)" />
+    <Parameter Name="birth" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="password" Type="System.String" DbType="NChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.funcFindConversationName" Method="funcFindConversationName" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcFindConversationNameResult">
+      <Column Name="userid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcOfflineList" Method="funcOfflineList" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcOfflineListResult">
+      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="lasttimemodified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcOnlineList" Method="funcOnlineList" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcOnlineListResult">
+      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="user_id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="status" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="lasttimemodified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcGetListMessage" Method="funcGetListMessage" IsComposable="true">
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcGetListMessageResult">
+      <Column Name="msid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="userid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="contents" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="creationtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcGetAllConversation" Method="funcGetAllConversation" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="funcGetAllConversationResult">
+      <Column Name="conversationid" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>

@@ -1,0 +1,45 @@
+﻿INSERT INTO dbo.tbFriend
+(
+    id,
+    status
+)
+VALUES
+(   dbo.funcMyNewIDFriend(), -- id - nchar(10)
+    N'friend'  -- status - nchar(10)
+    )
+GO
+SELECT * FROM
+dbo.tbFriend
+GO
+SELECT * FROM dbo.tbUser
+GO
+SELECT * FROM dbo.tbUser_Friend
+GO
+INSERT INTO dbo.tbUser_Friend
+(
+    user_id,
+    friend_id
+)
+VALUES
+(   N'US5E53C599', -- user_id - nchar(10)
+    N'FRF884178D'  -- friend_id - nchar(10)
+    )
+	GO
+SELECT tb3.friend_id, tb3.user_id, tb3.status, tb3.email, tb3.birth, tb3.sex, tb3.nameshow,tb3.connectionid, tb3.onlinestatus, conversationid, readstatus FROM
+
+(SELECT * FROM
+(SELECT tb2.friend_id,tb2.user_id,status FROM
+(SELECT tb1.friend_id, user_id
+FROM
+(SELECT friend_id FROM
+dbo.tbUser AS us1 JOIN dbo.tbUser_Friend ON tbUser_Friend.user_id = us1.id
+WHERE us1.id = 'US5E53C599') AS tb1 JOIN dbo.tbUser_Friend ON tbUser_Friend.friend_id = tb1.friend_id WHERE tbUser_Friend.user_id <>'US5E53C599') AS tb2 JOIN dbo.tbFriend
+ON tbFriend.id = tb2.friend_id) AS tb3	JOIN dbo.tbUser ON tbUser.id = tb3.user_id) AS tb3 JOIN dbo.tbConversation_User ON tbConversation_User.userid = tb3.id
+GO
+
+
+CS5019B229
+
+US992B7B5C
+US5E53C599
+INSERT INTO tbc

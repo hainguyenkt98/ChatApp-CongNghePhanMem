@@ -1,0 +1,7 @@
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Debug\Model.dll.config
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Debug\Model.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\bin\Debug\Model.pdb
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Debug\Model.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Debug\Model.pdb
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\Model\obj\Debug\Model.csprojAssemblyReference.cache

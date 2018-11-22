@@ -1,0 +1,114 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script src="~/Assets/JS/jquery-3.3.1.min.js"></script>
+    <script src="~/Assets/JS/bootstrap.bundle.min.js"></script>
+    <script src="~/Assets/JS/bootstrap.min.js"></script>
+    <script src="~/Assets/JS/mainframe.js"></script>
+    <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Assets/Fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Assets/CSS/mainframe.css" rel="stylesheet" />
+    <link href="~/Assets/CSS/frames.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width" />
+
+    @RenderSection("scripts", required: false)
+
+    <title>View</title>
+</head>
+<body id="background-app">
+    <div class="container-fluid">
+        <div class="row header-logo">
+            <nav>
+                <div class="toggle-wrap">
+                    <span class="toggle-bar"></span>
+                </div>
+                <hgroup>
+                    <img class="logo"  src="~/Images/logo.png" />
+                    <h3>Ứng dụng Web Chat Online</h3>
+                </hgroup>
+            </nav>
+
+            <aside>
+                <div class="page-wrapper chiller-theme">
+                    <nav id="sidebar" class="sidebar-wrapper">
+                        <div class="sidebar-content">
+                            <div class="sidebar-brand">
+                                <a href="#">Thanh công cụ</a>
+                            </div>
+                            <div class="sidebar-header">
+                                @RenderSection("userinfo", required: false);
+                            </div>
+                            <!-- sidebar-header  -->
+                            <div class="sidebar-menu">
+                                <ul>
+                                    <li class="header-menu">
+                                        <span>Chức năng</span>
+                                    </li>
+                                    <li class="sidebar sidebar-search">
+                                        <a href="@Url.Action("Index","SearchFriend")">
+                                            <i class="fas fa-search"></i>
+                                            <span>Tìm kiếm bạn bè</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-message">
+                                        <a href="@Url.Action("Index","MainChat")">
+                                            <i class="far fa-comment"></i>
+                                            <span>Trò chuyện</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-friendlist">
+                                        <a href="@Url.Action("Index","ListFriend")">
+                                            <i class="fas fa-user-friends"></i>
+                                            <span>Danh sách bạn bè</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-info">
+                                        <a href="@Url.Action("","")">
+                                            <i class="far fa-comments"></i>
+                                            <span>Nhóm trò chuyện</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-banfriendlist">
+                                        <a href="@Url.Action("Index","BlockFriend")">
+                                            <i class="fas fa-ban"></i>
+                                            <span>Danh sách chặn</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-info">
+                                        <a href="@Url.Action("Index","Profile")">
+                                            <i class="fas fa-info"></i>
+                                            <span>Thông tin cá nhân</span>
+                                        </a>
+                                    </li>
+                                    <li class="sidebar sidebar-logout">
+
+                                        <a href="@Url.Action("Logout","User")">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            <span>Đăng xuất</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- sidebar-menu  -->
+                        </div>
+                    </nav>
+                    <!-- sidebar-wrapper  -->
+                </div>
+            </aside>
+        </div>
+
+        <div class="main-content row">
+            <div class="main-function">
+                <!-- main function at here -->
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>
