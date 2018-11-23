@@ -5,7 +5,8 @@
     var isGroup;
     var pathImageConversation = "";
     var nameconversation = "";
-
+    var useridcurrent = "";
+    var useridmain = "";
     $(document).on("click", ".left-chat li .chatList", function () {
 
         //$(this).
@@ -15,9 +16,11 @@
         var conversationname = $(this).find('.desc h5').text();
 
         conversationidcurrent = $(this).data('conversationid');
+
         var group = $('.left-chat li .chatList .img img').attr('isGroup');
         if (group = 'false') {
             isGroup = false;
+
         } else {
             isGroup = true;
         }
@@ -75,7 +78,6 @@
                 $('.right-chat .message ul').html(s);
                 $('.headRight-chat h3').text(conversationname);
                 scrollBottom();
-
 
             }
         });
@@ -155,7 +157,7 @@
 
     //Chat Start
 
-    var userid = $('.user-info').data('userid');
+    useridmain = $('.user-info').data('userid');
     var chat = $.connection.chatHub;
     // Create a function that the hub can call to broadcast messages.
 
@@ -213,19 +215,23 @@
     $.connection.hub.start().done(function () {
         var connectionId = $.connection.hub.id;
         updateConnectionId(connectionId);//Cap nhat id vao db
-        chat.server.SetupAllConversation(userid);// Khai bao cac group
+        chat.server.SetupAllConversation(useridmain);// Khai bao cac group
 
         $('.btn-send').click(function () {
-            var usersendmessage = setCurrentPathImage(userid);
+
+            var useridcurrent = getIdUserFromSingleConversation(conversationidcurrent, useridmain);
+
+
+            var usersendmessage = setCurrentPathImage(useridcurrent);
             pathImageSender = usersendmessage.PathImage;
 
             var content = $('#messagecontent').val();
             if (conversationidcurrent != "" && content.trim().length > 0) {
-                chat.server.SendMessage(content, userid, conversationidcurrent);
+                chat.server.SendMessage(content, useridmain, conversationidcurrent);
                 var currentdate = new Date();
                 var s = '<li class="msg-right">'
                     + '<div class="msg-left-sub">'
-                    + '<img src="' + pathimage + '">'
+                    + '<img src="' + pathImageSender + '">'
                     + '<div class="msg-desc">'
                     + content
                     + '</div>'
@@ -236,7 +242,7 @@
                 $('#messagecontent').val("");
                 $('#messagecontent').focus();
                 scrollBottom();
-                resetConversation(connectionId, content, isGroup, pathImageSender, nameconversation, true);
+                resetConversation(conversationidcurrent, content, isGroup, pathImageSender, nameconversation, true);
             }
         });
     });
@@ -350,7 +356,7 @@ function setComversationReaded(conversationid) {
         });
 }
 function setReadOnlineList(conversationid) {
-    var element = $(".onlineitem[data-conversationid$=" + conversationid + "]").find('.tickread.readfriend');
+    var element = $(".onlineitem[data-conversationid$=" + conversationid + "]").find('.tickread');
     element.addClass('readfriend');
 }
 function setReadConversation(conversationid) {
@@ -371,4 +377,19 @@ function getNameConversation(conversationid, userid) {
             }
         });
     return nameConversation;
+}
+function getIdUserFromSingleConversation(conversationid, useridmain) {
+    var userid = "";
+    $.ajax(
+        {
+            async: false,
+            url: "/MainChat/GetIdUserFromSingleConversation",
+            data: { conversationid: conversationid, userid: useridmain },
+            dataType: "json",
+            type: "post",
+            success: function (result) {
+                userid = result;
+            }
+        });
+    return userid;
 }

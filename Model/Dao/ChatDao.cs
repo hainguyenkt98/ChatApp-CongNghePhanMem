@@ -252,8 +252,13 @@ namespace Model.Dao
         {
             using (ChatAppLQDataContext context = new ChatAppLQDataContext())
             {
-                var tbCU = context.tbConversation_Users.Where(m => m.conversationid.Trim() == conversationid && m.userid.Trim() == userid).FirstOrDefault();
-                tbCU.readstatus = false;
+                var listUser = context.tbConversation_Users.Where(m => m.conversationid.Trim() == conversationid && m.userid != userid);
+                foreach (var item in listUser)
+                {
+                    var tbCU = context.tbConversation_Users.Where(m => m.conversationid.Trim() == conversationid && m.userid.Trim() == item.userid.Trim()).FirstOrDefault();
+                    tbCU.readstatus = false;
+                    context.SubmitChanges();
+                }
             }
         }
         public void setConversationRead(string conversationid, string userid)
@@ -261,9 +266,10 @@ namespace Model.Dao
             using (ChatAppLQDataContext context = new ChatAppLQDataContext())
             {
                 var tbCU = context.tbConversation_Users.Where(m => m.conversationid.Trim() == conversationid && m.userid.Trim() == userid).FirstOrDefault();
-                if(tbCU !=null)
+                if (tbCU != null)
                 {
                     tbCU.readstatus = true;
+                    context.SubmitChanges();
                 }
             }
         }
@@ -272,7 +278,7 @@ namespace Model.Dao
             using (ChatAppLQDataContext context = new ChatAppLQDataContext())
             {
                 var conversation = context.tbConversations.Where(m => m.id.Trim() == conversationid).FirstOrDefault();
-                if((bool)conversation.isGroup == true)
+                if ((bool)conversation.isGroup == true)
                 {
                     return conversation.name.Trim();
                 }
@@ -280,6 +286,25 @@ namespace Model.Dao
                 {
                     var us = context.tbUsers.Where(m => m.id.Trim() == userid).FirstOrDefault();
                     return us.nameshow.Trim();
+                }
+            }
+        }
+        public string getIdUserFromSingleConversation(string conversationid, string userid)
+        {
+            using (ChatAppLQDataContext context = new ChatAppLQDataContext())
+            {
+                var conversation = context.tbConversations.Where(m => m.id.Trim() == conversationid).FirstOrDefault();
+                if ((bool)conversation.isGroup == true)
+                {
+                    return "";
+                }
+                else
+                {
+                    var us = (from user in context.tbUsers
+                              join conv in context.tbConversation_Users on user.id.Trim() equals conv.userid.Trim()
+                              where user.id.Trim() != userid && conv.conversationid.Trim() == conversationid
+                              select user).FirstOrDefault() ;
+                    return us.id.Trim();
                 }
             }
         }

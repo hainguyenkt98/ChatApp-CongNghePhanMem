@@ -74,6 +74,7 @@ namespace ChatApp.Hubs
             // Clients.Group(conversationid).sendMessage(content, userid, conversationid);
             Clients.OthersInGroup(conversationid).sendMessage(content, userid, conversationid);
             chatDao.InsertMessage(content, userid, conversationid);
+            
             chatDao.setConversationUnread(conversationid, userid);
             //Luu database
         }

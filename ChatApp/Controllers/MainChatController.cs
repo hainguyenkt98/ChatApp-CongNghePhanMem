@@ -66,5 +66,10 @@ namespace ChatApp.Controllers
             string conversationName = chatDao.getNameConversation(conversationid, userid);
             return Json(conversationName, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult GetIdUserFromSingleConversation(string conversationid, string userid)
+        {
+            string usid = chatDao.getIdUserFromSingleConversation(conversationid, userid);
+            return Json(usid, JsonRequestBehavior.AllowGet);
+        }
     }
 }
