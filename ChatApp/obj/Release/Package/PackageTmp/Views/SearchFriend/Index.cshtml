@@ -14,7 +14,7 @@
 @section userinfo
 {
     <div class="user-pic">
-        <img class="img-responsive img-rounded" src="~/Images/img-profile.png" alt="User picture">
+        <img class="img-responsive img-rounded" src="@Model.UserLogin.Pathimage" alt="User picture">
     </div>
     <div class="user-info">
         <span class="user-name">
@@ -59,7 +59,15 @@
                         <li class="list-group-item list-group-item-light">
                             <div class="row">
                                 <div class="col-sm-2 image-friend">
-                                    <span><img src="../Images/img-friend.png" alt=""></span>
+                                    @if (item.PathImage.Trim().Length == 0 || item.PathImage == null)
+                                    {
+                                        <span><img src="../Images/img-friend.png" alt=""></span>
+                                    }
+                                    else
+                                    {
+                                        <span><img src="@item.PathImage.Trim()" alt=""></span>
+                                    }
+
                                 </div>
                                 <div class="col-sm-8 info-friend">
                                     <div class="row name-friend">

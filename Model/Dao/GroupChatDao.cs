@@ -69,5 +69,36 @@ namespace Model.Dao
                 context.deleteUserFromConversation(userid, conversationid);
             }
         }
+        public List<GroupChat> Finding(string keyword, string userID)
+        {
+            using (ChatAppLQDataContext context = new ChatAppLQDataContext())
+            {
+                List<GroupChat> listGroupChat = new List<GroupChat>();
+                var listAllGroup = context.getListConversationGroupChat(userID);
+                foreach (var item in listAllGroup)
+                {
+                    GroupChat grpC = new GroupChat();
+                    grpC.Conversationid = item.conversationid.Trim();
+                    grpC.Lastmodified = (DateTime)item.lasttimemodified;
+                    grpC.ListUserConversation = getListUserInConversation(item.conversationid.Trim());
+                    grpC.Name = item.name.Trim();
+                    listGroupChat.Add(grpC);
+                }
+                for (int i = 0; i < listGroupChat.Count; i++)
+                {
+                    if (!listGroupChat[i].Name.Contains(keyword))
+                    {
+                        var user = listGroupChat[i].ListUserConversation.FirstOrDefault(m => m.Nameshow.Contains(keyword) || m.Email.Contains(keyword));
+                        if (user == null)
+                        {
+                            int index = listGroupChat.FindIndex(m => m.Conversationid.Trim() == listGroupChat[i].Conversationid.Trim());
+                            listGroupChat.RemoveAt(index);
+                            i--;
+                        }
+                    }
+                }
+                return listGroupChat;
+            }
+        }
     }
 }

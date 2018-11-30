@@ -68,6 +68,12 @@
                                             <span>Danh sách bạn bè</span>
                                         </a>
                                     </li>
+                                    <li class="sidebar sidebar-info">
+                                        <a href="@Url.Action("Index","ManageGroupChat")">
+                                            <i class="far fa-comments"></i>
+                                            <span>Nhóm trò chuyện</span>
+                                        </a>
+                                    </li>
                                     <li class="sidebar sidebar-banfriendlist">
                                         <a href="@Url.Action("Index","BlockFriend")">
                                             <i class="fas fa-ban"></i>
@@ -75,13 +81,13 @@
                                         </a>
                                     </li>
                                     <li class="sidebar sidebar-info">
-                                        <a href="#">
+                                        <a href="@Url.Action("Index","Profile")">
                                             <i class="fas fa-info"></i>
-                                            <span>Quản lý thông tin</span>
+                                            <span>Thông tin cá nhân</span>
                                         </a>
                                     </li>
                                     <li class="sidebar sidebar-logout">
-                                        
+
                                         <a href="@Url.Action("Logout","User")">
                                             <i class="fas fa-sign-out-alt"></i>
                                             <span>Đăng xuất</span>

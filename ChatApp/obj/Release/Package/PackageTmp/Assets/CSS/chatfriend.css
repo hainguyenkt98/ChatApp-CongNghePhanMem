@@ -201,7 +201,7 @@
             }
 
     .left-chat .chatList .desc {
-        width: calc(100% - 60px);
+        width: calc(100% - 100px);
         float: left;
         position: relative;
     }
@@ -220,11 +220,11 @@
         }
 
         .left-chat .chatList .desc .mess-unread {
-            color: #83878c;
+            color: #ffffff;
         }
 
         .left-chat .chatList .desc .mess-readed {
-            color: #ffffff;
+            color: #c1c1c1;
         }
 
 .online-list .onlineitem .img {
@@ -250,7 +250,7 @@
     }
 
 .online-list .onlineitem .desc {
-    width: calc(100% - 60px);
+    width: calc(100% - 100px);
     float: left;
     position: relative;
 }
@@ -452,7 +452,7 @@
 .right-chat-bottom {
     background: #fff;
     width: 100%;
-    padding: 15px;
+    padding: 10px;
     position: absolute;
     bottom: 0px;
     border-top: 1px solid #E6E6E6;
@@ -461,8 +461,9 @@
 
     .right-chat-bottom input {
         border: 0px;
-        padding: 8px 5px;
+        padding-left: 5px;
         width: calc(100% - 150px);
+        height: 42px;
     }
 
     .right-chat-bottom .btn-send {
@@ -471,8 +472,9 @@
         float: right;
         margin-right: 30px;
         font-size: 18px;
-        background: transfer;
+        background-color: transparent;
         cursor: pointer;
+        margin-right: 0px;
     }
 
 .upload-btn {
@@ -498,7 +500,22 @@
         top: 0;
         opacity: 0;
     }
-.mCustomScrollbar
-{
-    overflow-y : auto;
+
+.mCustomScrollbar {
+    overflow-y: auto;
+}
+
+.tickread {
+    height: 15px;
+    width: 15px;
+    position: relative;
+    float: left;
+    margin-left: 5px;
+    margin-top: 12px;
+    color: #FA3E3E;
+    text-align: center;
+}
+
+.readfriend {
+    display: none;
 }

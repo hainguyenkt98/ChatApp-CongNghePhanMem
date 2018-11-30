@@ -1,102 +1,123 @@
-html{
-	position: relative;
-	min-height: 100%;
+html {
+    position: relative;
+    min-height: 100%;
 }
-body{
-	background-repeat: no-repeat;
-	background-size: cover;
+
+body {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #444753;
 }
-.header{
-	background-color: #9999ff;
-	margin: auto;
-	min-width: -webkit-max-content;
-	height:65px;
+
+.header {
+    background-color: #2F3136;
+    margin: auto;
+    min-width: -webkit-max-content;
+    height: 65px;
 }
-.header span{
-	min-width: -webkit-max-content;
+
+    .header span {
+        min-width: -webkit-max-content;
+    }
+
+.header-inner, .web-body, .footer-inner {
+    width: 800px;
+    margin: auto;
 }
-.header-inner, .web-body, .footer-inner{
-	width: 800px;
-	margin: auto;
+
+.web-body {
+    margin-top: 40px;
+    margin-bottom: 140px;
+    /* background-color: #a9bbd8; */
 }
-.web-body{
-	margin-top: 40px;
-	margin-bottom: 140px;
+
+.reg-form {
+    width: 450px;
+    margin: auto;
+    padding: 20px;
+    background-color: #e0e0d1;
 }
-.reg-form{	
-	width: 450px;
-	margin: auto;
-	padding: 20px;
-	background-color: #e0e0d1;
-}
+
 .has-feedback .form-control-feedback {
-	position: absolute;
-	line-height: 3rem;
-	pointer-events: none;
+    position: absolute;
+    line-height: 3rem;
+    pointer-events: none;
 }
+
 .has-feedback .form-control {
-	padding-left: 40px;
-	margin-top: 10px;
-	height: 45px;
-	font-size: 16pt;
-	font-weight: 300;
+    padding-left: 40px;
+    margin-top: 10px;
+    height: 45px;
+    font-size: 16pt;
+    font-weight: 300;
 }
-.form-control-feedback{
-	margin-left: 15px;
+
+.form-control-feedback {
+    margin-left: 15px;
 }
-.form-inline{
-	display: block;
-	margin-bottom: 10px;
+
+.form-inline {
+    display: block;
+    margin-bottom: 10px;
 }
-#rightbox{
-	float: right;
-	width: 48%;
-	height: 45px;
-	font-size: 16pt;
-	font-weight: 300;
+
+#rightbox {
+    float: right;
+    width: 48%;
+    height: 45px;
+    font-size: 16pt;
+    font-weight: 300;
 }
-#leftbox{
-	width: 48%;
-	height: 45px;
-	font-size: 16pt;
-	font-weight: 300;
+
+#leftbox {
+    width: 48%;
+    height: 45px;
+    font-size: 16pt;
+    font-weight: 300;
 }
-.footer-inner{
-	text-align: center;
-	padding: 20px 0;
+
+.footer-inner {
+    text-align: center;
+    padding: 20px 0;
+    color: white;
 }
-.footer{
-	border-top: 1px solid #e2e2e2;
-	width: 100%;
-	z-index: 5;
-	bottom: 0;
-	position: absolute;
-	left: 0;
-	min-width: -webkit-max-content;
-	background-color: #ffffe6;
-	opacity: 0.6;
+
+.footer {
+    border-top: 1px solid #e2e2e2;
+    width: 100%;
+    z-index: 5;
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    min-width: -webkit-max-content;
+    background-color: #2F3136;
+    opacity: 0.6;
 }
-#btn-signup{
-	margin-left: 160px;
+
+#btn-signup {
+    margin-left: 160px;
 }
-#slogan{
-	font-size:18pt; 
-	color:#ffff4d;
-	padding: 5px 15px;
-	position: absolute;
-	margin-left: 200px;
-	margin-top: 5px;
+
+#slogan {
+    font-size: 18pt;
+    color: #ffff4d;
+    padding: 5px 15px;
+    position: absolute;
+    margin-left: 200px;
+    margin-top: 5px;
 }
-#btn-signin{
-	margin-left: 150px;
+
+#btn-signin {
+    margin-left: 150px;
 }
-.form-bottom{
-	padding: 10px 10px 0;
+
+.form-bottom {
+    padding: 10px 10px 0;
 }
-.logo
-{
-	height: 80px;
-	width: 80px;
-	margin-top: 10px;
-	margin-left: 42%;
+
+.logo {
+    height: 80px;
+    width: 80px;
+    margin-top: 10px;
+    margin-left: 42%;
 }

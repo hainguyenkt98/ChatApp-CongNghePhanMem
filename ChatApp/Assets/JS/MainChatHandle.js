@@ -182,9 +182,18 @@
 
     chat.client.SendMessage = function (content, userid, conversationid) {
         var presentConversationName = "";
-        var usersendmessage = setCurrentPathImage(userid);
-        pathImageSender = usersendmessage.PathImage;
+        var usersendmessage;
+        pathImageSender;
         var element = $(".chatList[data-conversationid$=" + conversationid + "]");
+        if (isGroup == false) {
+            presentConversationName = "";
+            usersendmessage = setCurrentPathImage(userid);
+            pathImageSender = usersendmessage.PathImage;
+            element = $(".chatList[data-conversationid$=" + conversationid + "]");
+        } else {
+            pathImageSender = "/Images/group.png";
+        }
+
 
         presentConversationName = getNameConversation(conversationid, userid);
         //Set lai name conversation khi tin nhan chua co trong lich su
@@ -233,7 +242,7 @@
             //    useridcurrent = getIdUserFromSingleConversation(conversationidcurrent, useridmain);
             //    usersendmessage = setCurrentPathImage(useridcurrent);
             //}
-            
+
 
             var content = $('#messagecontent').val();
             if (conversationidcurrent != "" && content.trim().length > 0) {

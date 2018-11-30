@@ -40,5 +40,15 @@ namespace ChatApp.Controllers
             UserLogin userLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
             groupChatDao.leaveConversation(userLogin.Id.Trim(), conversationid);
         }
+        public JsonResult Finding(string keyword)
+        {
+            UserLogin userLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
+            if (userLogin == null)
+            {
+                RedirectToAction("Index", "User");
+            }
+            List<GroupChat> listGroupChat = groupChatDao.Finding(keyword, userLogin.Id.Trim());
+            return Json(listGroupChat, JsonRequestBehavior.AllowGet);
+        }
     }
 }
