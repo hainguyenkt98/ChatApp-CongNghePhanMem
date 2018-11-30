@@ -129,6 +129,7 @@
     <Content Include="Assets\CSS\datepicker.css" />
     <Content Include="Assets\CSS\forgotpass.css" />
     <Content Include="Assets\CSS\frames.css" />
+    <Content Include="Assets\CSS\groupmanage.css" />
     <Content Include="Assets\CSS\jquery-ui.css" />
     <Content Include="Assets\CSS\layout.css" />
     <Content Include="Assets\CSS\listfriend.css" />
@@ -1522,6 +1523,7 @@
     <Content Include="Assets\JS\bootstrap.js" />
     <Content Include="Assets\JS\bootstrap.min.js" />
     <Content Include="Assets\JS\chatfriend.js" />
+    <Content Include="Assets\JS\groupmanage.js" />
     <Content Include="Assets\JS\jquery-3.3.1.min.js" />
     <Content Include="Assets\JS\jquery-ui.js" />
     <Content Include="Assets\JS\listfriend.js" />
@@ -1618,6 +1620,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlockFriendController.cs" />
     <Compile Include="Controllers\ListFriendController.cs" />
+    <Compile Include="Controllers\ManageGroupChatController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\SearchFriendController.cs" />
     <Compile Include="Controllers\MainChatController.cs" />
@@ -1627,6 +1630,7 @@
     </Compile>
     <Compile Include="Hubs\ChatHub.cs" />
     <Compile Include="Models\BlockFriendModel.cs" />
+    <Compile Include="Models\GroupChatModel.cs" />
     <Compile Include="Models\ListFriendModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ProfileModel.cs" />
@@ -1647,6 +1651,7 @@
     <Content Include="Views\ListFriend\Index.cshtml" />
     <Content Include="Views\BlockFriend\Index.cshtml" />
     <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\ManageGroupChat\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

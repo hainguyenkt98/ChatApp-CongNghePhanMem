@@ -1,0 +1,103 @@
+.btn-addnewgroup i.fa.fa-plus.fa-2x {
+    color: snow;
+}
+.btn-addnewgroup
+{
+	margin-left: 50%;
+	width: 40px;
+	text-align: center;
+	border-radius: 5px;
+}
+.btn-addnewgroup:hover
+{
+	cursor: pointer;
+	background: #5A6268;
+}
+.flex-container {
+  -webkit-flex-wrap: wrap; /* Safari */
+  flex-wrap:         wrap;
+  height: 100px;
+  overflow-y: auto;
+  border-radius: 5px;
+  border: 1px solid #CED4DA;
+}
+.modal.fade
+{
+	margin-top: 100px;
+}
+.group-item
+{
+	height: 30px;
+	width: 90%;
+	margin: 2px;
+	border: 1px solid #CED4DA;
+	border-radius: 5px;
+}
+.group-item .name
+{
+	float: left;
+	height: 100%;
+	width: calc(100% - 60px);
+	border-left: 1px solid #CED4DA;
+	padding-left: 5px;
+}
+.group-item .btn-delete
+{
+	float: right;
+	height: 100%;
+	width: 30px;
+	text-align: center;
+/*	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;*/
+}
+.group-item .btn-delete:hover
+{
+	color: red;
+	cursor: pointer;
+	font-weight: bold;
+}
+.group-item .image
+{
+	width: 30px;
+	height: 100%;
+	float: left;
+	background-color: #E7EAED;
+}
+.group-item .image img
+{
+	width: 25px;
+	height: 25px;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+	margin-left: 2px;
+}
+.addnewgroup-modal
+{
+	width: 100px;
+}
+.modal-content
+{
+	width: 80%;
+	margin-left: 10%;
+}
+.group-item:hover
+{
+	cursor: pointer;
+}
+.group-item .btn-add
+{
+	float: right;
+	height: 100%;
+	width: 30px;
+	text-align: center;
+}
+.group-item .btn-add span
+{
+	margin-top: -3px;
+}
+.group-item .btn-add:hover
+{
+	color: green;
+	cursor: pointer;
+	font-weight: bold;
+}

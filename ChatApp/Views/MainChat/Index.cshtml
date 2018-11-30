@@ -58,8 +58,23 @@
                 <ul>
                     @foreach (var item in Model.ListFriendInfo)
                     {
+                        string userid = "";
+                        string connectionid = "";
+                        string name = "";
+                        if(item.IsGroup == true)
+                        {
+                            userid = "";
+                            connectionid = "";
+                            name = item.GroupName.Trim();
+                        }
+                        else
+                        {
+                            userid = item.Id.Trim();
+                            connectionid = item.Connectionid.Trim();
+                            name = item.Nameshow.Trim();
+                        }
                         <li>
-                            <div class="onlineitem" data-conversationid="@item.Conversationid.Trim()" data-connectionid="@item.Connectionid.Trim()" data-userid="@item.Id.Trim()">
+                            <div class="onlineitem" data-conversationid="@item.Conversationid.Trim()" data-connectionid="@connectionid" data-userid="@userid">
                                 <div class="img">
                                     @if (item.Onlinestatus == true)
                                     {
@@ -69,18 +84,24 @@
                                     {
                                         <i class="fa fa-circle offline"></i>
                                     }
-                                    @if (item.PathImage.Trim().Length == 0 || item.PathImage == null)
+                                    @if (item.IsGroup == true)
                                     {
-                                        <img src="~/Images/img-friend.png">
+                                        <img src="~/Images/group.png" isgroup="true">
                                     }
                                     else
                                     {
-                                        <img src="@item.PathImage.Trim()">
+                                        if (item.PathImage.Trim().Length == 0 || item.PathImage == null)
+                                        {
+                                            <img src="~/Images/img-friend.png" isgroup="false">
+                                        }
+                                        else
+                                        {
+                                            <img src="@item.PathImage.Trim()"  isgroup="false">
+                                        }
                                     }
-
                                 </div>
                                 <div class="desc">
-                                    <h5>@item.Nameshow.Trim()</h5>
+                                    <h5>@name</h5>
                                 </div>
 
                                 @if ((bool)item.ReadStatus == true)
@@ -133,17 +154,17 @@
 
                                     @if (item.Isgroup == true)
                                     {
-                                        <img src="~/Images/group.png" isGroup="true" />
+                                        <img src="~/Images/group.png" isgroup="true" />
                                     }
                                     else
                                     {
                                         if (item.PathImage == "")
                                         {
-                                            <img src="/Images/img-friend.png" isGroup="false" />
+                                            <img src="/Images/img-friend.png" isgroup="false" />
                                         }
                                         else
                                         {
-                                            <img src="@item.PathImage" isGroup="false" />
+                                            <img src="@item.PathImage" isgroup="false" />
                                         }
                                     }
                                 </div>

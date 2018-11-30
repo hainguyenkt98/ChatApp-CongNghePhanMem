@@ -20,6 +20,10 @@ namespace Model.Marsk
         private string conversationid;
         private DateTime lastmodified;
         private bool readStatus;
+
+        private bool isGroup;
+        private string groupName = "";
+
         public string Id { get => id; set => id = value; }
         public string Email { get => email; set => email = value; }
         public DateTime Birth { get => birth; set => birth = value; }
@@ -32,5 +36,7 @@ namespace Model.Marsk
         public string Conversationid { get => conversationid; set => conversationid = value; }
         public DateTime Lastmodified { get => lastmodified; set => lastmodified = value; }
         public bool ReadStatus { get => readStatus; set => readStatus = value; }
+        public bool IsGroup { get => isGroup; set => isGroup = value; }
+        public string GroupName { get => groupName; set => groupName = value; }
     }
 }

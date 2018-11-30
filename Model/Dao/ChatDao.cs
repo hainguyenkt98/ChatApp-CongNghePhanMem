@@ -29,9 +29,17 @@ namespace Model.Dao
                 var onlineList = context.funcOnlineList(userID);
                 var offlineList = context.funcOfflineList(userID);
 
+                var groupList = context.funcGetListGroup(userID);
+                var conversationOnlineList = context.funcGetAllConversation(userID);
+                var conversationOfflineList = context.funcGetAllConversation(userID);
+
 
                 onlineList = onlineList.OrderByDescending(m => m.lasttimemodified);
                 offlineList = offlineList.OrderByDescending(m => m.lasttimemodified);
+
+
+                var groupOnlineList = groupList.Where(m => (bool)context.funcGetOnlineStatusConversation(m.conversationid.Trim(),userID) == true).OrderByDescending(m => m.lasttimemodified);
+                var groupOfflineList = groupList.Where(m => (bool)context.funcGetOnlineStatusConversation(m.conversationid.Trim(),userID) == false).OrderByDescending(m => m.lasttimemodified);
 
                 List<FriendInfo> list = new List<FriendInfo>();
                 foreach (var item in onlineList)
@@ -51,6 +59,19 @@ namespace Model.Dao
                     finF.ReadStatus = (bool)item.readstatus;
                     list.Add(finF);
                 }
+
+                foreach(var item in groupOnlineList)
+                {
+                    FriendInfo finF = new FriendInfo();
+                    finF.Conversationid = item.conversationid.Trim();
+                    finF.GroupName = item.name.Trim();
+                    finF.ReadStatus = (bool)item.readstatus;
+                    finF.Lastmodified = (DateTime)item.lasttimemodified;
+                    finF.IsGroup = (bool)item.isGroup;
+                    finF.Onlinestatus = (bool)context.funcGetOnlineStatusConversation(item.conversationid.Trim(), userID);
+                    list.Add(finF);
+                }
+
                 foreach (var item in offlineList)
                 {
                     FriendInfo finF = new FriendInfo();
@@ -66,6 +87,17 @@ namespace Model.Dao
                     finF.Sex = item.sex.Trim();
                     finF.PathImage = item.pathimage.Trim();
                     finF.ReadStatus = (bool)item.readstatus;
+                    list.Add(finF);
+                }
+                foreach (var item in groupOfflineList)
+                {
+                    FriendInfo finF = new FriendInfo();
+                    finF.Conversationid = item.conversationid.Trim();
+                    finF.GroupName = item.name.Trim();
+                    finF.ReadStatus = (bool)item.readstatus;
+                    finF.Lastmodified = (DateTime)item.lasttimemodified;
+                    finF.IsGroup = (bool)item.isGroup;
+                    finF.Onlinestatus = (bool)context.funcGetOnlineStatusConversation(item.conversationid.Trim(), userID);
                     list.Add(finF);
                 }
                 return list;
@@ -176,18 +208,6 @@ namespace Model.Dao
                 context.SubmitChanges();
             }
         }
-
-        //public void setOnlineStatus(string connectionid)
-        //{
-        //    using (ChatAppLQDataContext context = new ChatAppLQDataContext())
-        //    {
-        //        var us = context.tbUsers.Where(m => m.connectionid.Trim() == connectionid).FirstOrDefault();
-        //        if (us == null)
-        //            return;
-        //        us.onlinestatus = true;
-        //        context.SubmitChanges();
-        //    }
-        //}
 
         public List<ChatLogInfo> GetAllConversation(string userid)
         {
@@ -303,9 +323,16 @@ namespace Model.Dao
                     var us = (from user in context.tbUsers
                               join conv in context.tbConversation_Users on user.id.Trim() equals conv.userid.Trim()
                               where user.id.Trim() != userid && conv.conversationid.Trim() == conversationid
-                              select user).FirstOrDefault() ;
+                              select user).FirstOrDefault();
                     return us.id.Trim();
                 }
+            }
+        }
+        public bool getOnlineStatusConversation(string conversationid, string userID)
+        {
+            using (ChatAppLQDataContext context = new ChatAppLQDataContext())
+            {
+                return (bool)context.funcGetOnlineStatusConversation(conversationid, userID);
             }
         }
     }

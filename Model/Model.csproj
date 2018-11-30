@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Dao\BlockFriendDao.cs" />
     <Compile Include="Dao\ChatDao.cs" />
+    <Compile Include="Dao\GroupChatDao.cs" />
     <Compile Include="Dao\ListFriendDao.cs" />
     <Compile Include="Dao\ProfileDao.cs" />
     <Compile Include="Dao\SearchDao.cs" />
@@ -55,8 +56,10 @@
     </Compile>
     <Compile Include="Marsk\ChatLogInfo.cs" />
     <Compile Include="Marsk\FriendInfo.cs" />
+    <Compile Include="Marsk\GroupChat.cs" />
     <Compile Include="Marsk\MessageItem.cs" />
     <Compile Include="Marsk\ProfileUser.cs" />
+    <Compile Include="Marsk\UserConversation.cs" />
     <Compile Include="Marsk\UserLogin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">

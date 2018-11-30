@@ -289,6 +289,37 @@ namespace Model.LinQ
 		{
 			return this.CreateMethodCallQuery<funcGetAllConversationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getListConversationGroupChat", IsComposable=true)]
+		public IQueryable<getListConversationGroupChatResult> getListConversationGroupChat([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string userid)
+		{
+			return this.CreateMethodCallQuery<getListConversationGroupChatResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.funcGetAllUserConversation", IsComposable=true)]
+		public IQueryable<funcGetAllUserConversationResult> funcGetAllUserConversation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string conversationid)
+		{
+			return this.CreateMethodCallQuery<funcGetAllUserConversationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), conversationid);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteUserFromConversation")]
+		public int deleteUserFromConversation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string userid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string conversationid)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid, conversationid);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.funcGetListGroup", IsComposable=true)]
+		public IQueryable<funcGetListGroupResult> funcGetListGroup([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string userid)
+		{
+			return this.CreateMethodCallQuery<funcGetListGroupResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.funcGetOnlineStatusConversation", IsComposable=true)]
+		public System.Nullable<bool> funcGetOnlineStatusConversation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string conversationid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string userid)
+		{
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), conversationid, userid).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbAttachmment")]
@@ -3323,6 +3354,336 @@ namespace Model.LinQ
 				if ((this._readstatus != value))
 				{
 					this._readstatus = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getListConversationGroupChatResult
+	{
+		
+		private string _id;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _creationtime;
+		
+		private System.Nullable<System.DateTime> _lasttimemodified;
+		
+		private System.Nullable<bool> _isGroup;
+		
+		private string _conversationid;
+		
+		private string _userid;
+		
+		private System.Nullable<bool> _readstatus;
+		
+		private System.Nullable<bool> _active;
+		
+		public getListConversationGroupChatResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(30)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationtime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> creationtime
+		{
+			get
+			{
+				return this._creationtime;
+			}
+			set
+			{
+				if ((this._creationtime != value))
+				{
+					this._creationtime = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lasttimemodified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lasttimemodified
+		{
+			get
+			{
+				return this._lasttimemodified;
+			}
+			set
+			{
+				if ((this._lasttimemodified != value))
+				{
+					this._lasttimemodified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isGroup", DbType="Bit")]
+		public System.Nullable<bool> isGroup
+		{
+			get
+			{
+				return this._isGroup;
+			}
+			set
+			{
+				if ((this._isGroup != value))
+				{
+					this._isGroup = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string conversationid
+		{
+			get
+			{
+				return this._conversationid;
+			}
+			set
+			{
+				if ((this._conversationid != value))
+				{
+					this._conversationid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string userid
+		{
+			get
+			{
+				return this._userid;
+			}
+			set
+			{
+				if ((this._userid != value))
+				{
+					this._userid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_readstatus", DbType="Bit")]
+		public System.Nullable<bool> readstatus
+		{
+			get
+			{
+				return this._readstatus;
+			}
+			set
+			{
+				if ((this._readstatus != value))
+				{
+					this._readstatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
+		public System.Nullable<bool> active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this._active = value;
+				}
+			}
+		}
+	}
+	
+	public partial class funcGetAllUserConversationResult
+	{
+		
+		private string _userid;
+		
+		private string _email;
+		
+		private string _nameshow;
+		
+		public funcGetAllUserConversationResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string userid
+		{
+			get
+			{
+				return this._userid;
+			}
+			set
+			{
+				if ((this._userid != value))
+				{
+					this._userid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="NChar(30)")]
+		public string email
+		{
+			get
+			{
+				return this._email;
+			}
+			set
+			{
+				if ((this._email != value))
+				{
+					this._email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nameshow", DbType="NChar(30)")]
+		public string nameshow
+		{
+			get
+			{
+				return this._nameshow;
+			}
+			set
+			{
+				if ((this._nameshow != value))
+				{
+					this._nameshow = value;
+				}
+			}
+		}
+	}
+	
+	public partial class funcGetListGroupResult
+	{
+		
+		private string _conversationid;
+		
+		private System.Nullable<bool> _readstatus;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _lasttimemodified;
+		
+		private System.Nullable<bool> _isGroup;
+		
+		public funcGetListGroupResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string conversationid
+		{
+			get
+			{
+				return this._conversationid;
+			}
+			set
+			{
+				if ((this._conversationid != value))
+				{
+					this._conversationid = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_readstatus", DbType="Bit")]
+		public System.Nullable<bool> readstatus
+		{
+			get
+			{
+				return this._readstatus;
+			}
+			set
+			{
+				if ((this._readstatus != value))
+				{
+					this._readstatus = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(30)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lasttimemodified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lasttimemodified
+		{
+			get
+			{
+				return this._lasttimemodified;
+			}
+			set
+			{
+				if ((this._lasttimemodified != value))
+				{
+					this._lasttimemodified = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isGroup", DbType="Bit")]
+		public System.Nullable<bool> isGroup
+		{
+			get
+			{
+				return this._isGroup;
+			}
+			set
+			{
+				if ((this._isGroup != value))
+				{
+					this._isGroup = value;
 				}
 			}
 		}

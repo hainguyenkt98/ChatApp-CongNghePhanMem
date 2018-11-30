@@ -33,7 +33,8 @@ namespace ChatApp.Hubs
 
             foreach (var item in listOnlineFriend)
             {
-                listConnection.Add(item.Connectionid.Trim());
+                if (item.Connectionid != null)
+                    listConnection.Add(item.Connectionid.Trim());
             }
             Clients.Clients(listConnection).notificationUserOffline(userid);
 
@@ -57,7 +58,8 @@ namespace ChatApp.Hubs
 
             foreach (var item in listOnlineFriend)
             {
-                listConnection.Add(item.Connectionid.Trim());
+                if (item.Connectionid !=null )
+                    listConnection.Add(item.Connectionid.Trim());
             }
 
             Clients.Clients(listConnection).notificationUserOnline(userid);
@@ -74,7 +76,7 @@ namespace ChatApp.Hubs
             // Clients.Group(conversationid).sendMessage(content, userid, conversationid);
             Clients.OthersInGroup(conversationid).sendMessage(content, userid, conversationid);
             chatDao.InsertMessage(content, userid, conversationid);
-            
+
             chatDao.setConversationUnread(conversationid, userid);
             //Luu database
         }

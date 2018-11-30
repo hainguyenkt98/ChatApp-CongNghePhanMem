@@ -17,8 +17,8 @@
 
         conversationidcurrent = $(this).data('conversationid');
 
-        var group = $('.left-chat li .chatList .img img').attr('isGroup');
-        if (group = 'false') {
+        var group = $(this).find('.img img').attr('isgroup');
+        if (group == 'false') {
             isGroup = false;
 
         } else {
@@ -28,7 +28,7 @@
 
         $(this).find('.desc small.mess-unread').addClass('mess-readed').removeClass('mess-unread');
         setReadOnlineList(conversationID);
-        setComversationReaded(conversationID);
+        setConversationReaded(conversationID);
         //End set status
 
         $.ajax({
@@ -90,7 +90,16 @@
         nameconversation = $(this).find('.desc h5').text();
 
         conversationidcurrent = $(this).data('conversationid');
-        isGroup = false;
+
+        var element = $(this).find('.img img');
+        var group = $(element).attr('isgroup');
+
+        if (group == 'false') {
+            isGroup = false;
+
+        } else {
+            isGroup = true;
+        }
         //End setup status
 
 
@@ -196,9 +205,6 @@
             $('#messagecontent').val("");
             scrollBottom();
 
-
-
-
             resetConversation(conversationid, content, isGroup, pathImageSender, nameconversation, true);
             setComversationReaded(conversationid);
             //setUnreadOnlineList(conversationid, content, isGroup, pathImageSender, nameconversation);
@@ -218,12 +224,16 @@
         chat.server.SetupAllConversation(useridmain);// Khai bao cac group
 
         $('.btn-send').click(function () {
-
-            var useridcurrent = getIdUserFromSingleConversation(conversationidcurrent, useridmain);
-
-
-            var usersendmessage = setCurrentPathImage(useridcurrent);
-            pathImageSender = usersendmessage.PathImage;
+            //var useridcurrent;
+            //var usersendmessage;
+            //if (isGroup == false) {
+            //    useridcurrent = getIdUserFromSingleConversation(conversationidcurrent, useridmain);
+            //    usersendmessage = setCurrentPathImage(useridcurrent);
+            //} else {
+            //    useridcurrent = getIdUserFromSingleConversation(conversationidcurrent, useridmain);
+            //    usersendmessage = setCurrentPathImage(useridcurrent);
+            //}
+            
 
             var content = $('#messagecontent').val();
             if (conversationidcurrent != "" && content.trim().length > 0) {
@@ -231,7 +241,7 @@
                 var currentdate = new Date();
                 var s = '<li class="msg-right">'
                     + '<div class="msg-left-sub">'
-                    + '<img src="' + pathImageSender + '">'
+                    + '<img src="' + pathimage + '">'
                     + '<div class="msg-desc">'
                     + content
                     + '</div>'
@@ -242,7 +252,7 @@
                 $('#messagecontent').val("");
                 $('#messagecontent').focus();
                 scrollBottom();
-                resetConversation(conversationidcurrent, content, isGroup, pathImageSender, nameconversation, true);
+                resetConversation(conversationidcurrent, content, isGroup, pathimage, nameconversation, true);
             }
         });
     });
@@ -290,9 +300,9 @@ function resetConversation(conversationid, contents, isGroup, pathImageSender, n
     element.remove();
     var image = "";
     if (isGroup == true) {
-        image = '<img src="~/Images/group.png" isGroup="true" />'
+        image = '<img src="/Images/group.png" isgroup="true" />'
     } else {
-        image = '<img src="' + pathImageSender + '" isGroup="false" />';
+        image = '<img src="' + pathImageSender + '" isgroup="false" />';
     }
     var currentdate = new Date();
     var readStatusHtml = "";
@@ -342,7 +352,7 @@ function setComversationUnread(conversationid) {
             }
         });
 }
-function setComversationReaded(conversationid) {
+function setConversationReaded(conversationid) {
     $.ajax(
         {
             async: true,
@@ -358,9 +368,11 @@ function setComversationReaded(conversationid) {
 function setReadOnlineList(conversationid) {
     var element = $(".onlineitem[data-conversationid$=" + conversationid + "]").find('.tickread');
     element.addClass('readfriend');
+    setConversationReaded(conversationid);
 }
 function setReadConversation(conversationid) {
     var element = $(".chatList[data-conversationid$=" + conversationid + "]").find('.desc small.mess-unread').removeClass('mess-unread').addClass('mess-readed');
+    setConversationReaded(conversationid);
 }
 
 function getNameConversation(conversationid, userid) {

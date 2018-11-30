@@ -1,0 +1,190 @@
+﻿@model ChatApp.Models.GroupChatModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts
+{
+    <link href="~/Assets/CSS/main-frame-list.css" rel="stylesheet" />
+    <link href="~/Assets/CSS/listfriend.css" rel="stylesheet" />
+    <script src="~/Assets/JS/listfriend.js"></script>
+    <link href="~/Assets/CSS/groupmanage.css" rel="stylesheet" />
+    <script src="~/Assets/JS/groupmanage.js"></script>
+
+}
+@section userinfo
+{
+    <div class="user-pic">
+        <img class="img-responsive img-rounded" src="@Model.UserLogin.Pathimage" alt="User picture">
+    </div>
+    <div class="user-info">
+        <span class="user-name">
+            @Model.UserLogin.Nameshow.Trim()
+        </span>
+        @if (Model.UserLogin.Role.Trim() == "admin")
+        {
+            <span class="user-role">Quản trị viên</span>
+        }
+        else
+        {
+            <span class="user-role">Người dùng</span>
+        }
+        <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Đang hoạt động</span>
+        </span>
+    </div>
+}
+
+
+<div class="row row-search">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-1">
+        <div class="btn-addnewgroup" data-toggle="modal" data-target="#addnewgroup-modal">
+            <span>
+                <i class="fa fa-plus fa-2x" aria-hidden="true"></i>
+            </span>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-secondary" type="button">Tìm</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div>
+</div>
+<!-- End search form -->
+<div class="row row-function">
+    <div class="row gridview">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="cover-list-group">
+                <ul class="list-group">
+                    @foreach (var item in Model.ListGroupChat)
+                    {
+                        <li class="list-group-item list-group-item-light">
+                            <div class="row">
+                                <div class="col-sm-2 image-friend">
+                                    <span><img src="~/Images/group.png" isGroup="true" /></span>
+                                </div>
+                                <div class="col-sm-8 info-friend">
+                                    <div class="row name-group">
+                                        <div class="col-sm-12">
+                                            <b>@item.Name</b>
+                                        </div>
+                                    </div>
+                                    <div class="row about-group">
+                                        <div class="col-sm-12">
+                                            @{
+                                                string s = "";
+                                                int cout = 0;
+                                                foreach (var us in item.ListUserConversation)
+                                                {
+                                                    s += us.Nameshow + " ,";
+                                                    cout++;
+                                                    if (cout == 5)
+                                                    {
+                                                        break;
+                                                    }
+                                                }
+                                                if (item.ListUserConversation.Count > 5)
+                                                {
+                                                    s += "...";
+                                                }
+                                                else
+                                                {
+                                                    s.Remove(s.Length - 1, 1);
+                                                }
+                                            }
+                                            <i>@s</i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2 function-friend" data-conversationid="@item.Conversationid">
+                                    <a href="#" class="btn btn-secondary btn-sm btn-leavegroup">Rời nhóm</a>
+                                </div>
+                            </div>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- End grid view -->
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+<div class="modal fade" id="addnewgroup-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tạo nhóm trò chuyện</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group name">
+                        <label for="recipient-name" class="col-form-label">Tên nhóm</label>
+                        <input type="text" class="form-control" id="conversation-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Thành viên trong nhóm</label>
+                        <div class="flex-container add-item">
+
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Bạn bè</label>
+                        <div class="flex-container friend-list">
+                            @foreach (var item in Model.ListFriend)
+                            {
+                                <div class="group-item" data-userid="@item.Id">
+                                    @if (item.PathImage.Trim() == "")
+                                    {
+                                        <div class="image"><img src="/Images/img-friend.png" alt=""></div>
+                                    }
+                                    else
+                                    {
+                                        <div class="image"><img src="@item.PathImage" alt=""></div>
+                                    }
+                                    <div class="name">@item.Nameshow</div>
+                                    <div class="btn-add"><span><i class="fas fa-plus"></i></span></div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary btn-save">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="warningmodal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nhắc nhở !</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Thông tin để thêm nhóm không chính xác, vui lòng kiểm tra lại !.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
