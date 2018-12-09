@@ -1,0 +1,7 @@
+﻿.alert.alert-success {
+    text-align: center;
+    margin-top: 30%;
+}
+.alert.alert-success > a{
+    margin-left: 5px;
+}

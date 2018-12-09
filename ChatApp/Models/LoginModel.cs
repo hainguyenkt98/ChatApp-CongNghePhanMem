@@ -8,7 +8,7 @@ namespace ChatApp.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage = "Mời nhập tài khoảng")]
+        [Required(ErrorMessage = "Mời nhập tài khoản")]
         public string UserName { set; get; }
         [Required(ErrorMessage = "Mời nhập mật khẩu")]
         public string PassWord { set; get; }

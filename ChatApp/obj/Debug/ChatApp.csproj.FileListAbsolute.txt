@@ -172,3 +172,8 @@ F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghe
 F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\obj\Debug\ChatApp.csproj.CopyComplete
 F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\obj\Debug\ChatApp.dll
 F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\obj\Debug\ChatApp.pdb
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\bin\BotDetect.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\bin\BotDetect.Web.Mvc.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\bin\System.Data.SQLite.dll
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\bin\System.Data.SQLite.xml
+F:\HCMUTE 2018-2019\Công nghệ phần mềm\Đồ án\ChatApp\ChatApp-CongNghePhanMem\ChatApp\bin\System.Data.SQLite.dll.config

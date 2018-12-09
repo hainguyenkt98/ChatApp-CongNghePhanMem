@@ -10,29 +10,18 @@
       <Association Name="tbMessage_tbAttachmment" Member="tbMessage" ThisKey="messageid" OtherKey="id" Type="tbMessage" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbUser" Member="tbUsers">
-    <Type Name="tbUser">
-      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="account" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
-      <Column Name="password" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
-      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
-      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="role" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
-      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="pathimage" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
-      <Association Name="tbUser_tbConversation_User" Member="tbConversation_Users" ThisKey="id" OtherKey="userid" Type="tbConversation_User" />
-      <Association Name="tbUser_tbMessage" Member="tbMessages" ThisKey="id" OtherKey="userid" Type="tbMessage" />
-      <Association Name="tbUser_tbUser_Friend" Member="tbUser_Friends" ThisKey="id" OtherKey="user_id" Type="tbUser_Friend" />
+  <Table Name="dbo.tbUser_Friend" Member="tbUser_Friends">
+    <Type Name="tbUser_Friend">
+      <Column Name="user_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="tbFriend_tbUser_Friend" Member="tbFriend" ThisKey="friend_id" OtherKey="id" Type="tbFriend" IsForeignKey="true" />
+      <Association Name="tbUser_tbUser_Friend" Member="tbUser" ThisKey="user_id" OtherKey="id" Type="tbUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbConversation" Member="tbConversations">
     <Type Name="tbConversation">
       <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
       <Column Name="creationtime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="lasttimemodified" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="isGroup" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
@@ -46,8 +35,8 @@
       <Column Name="userid" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="readstatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbUser_tbConversation_User" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
       <Association Name="tbConversation_tbConversation_User" Member="tbConversation" ThisKey="conversationid" OtherKey="id" Type="tbConversation" IsForeignKey="true" />
+      <Association Name="tbUser_tbConversation_User" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbFriend" Member="tbFriends">
@@ -65,16 +54,28 @@
       <Column Name="conversationid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Column Name="userid" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
       <Association Name="tbMessage_tbAttachmment" Member="tbAttachmments" ThisKey="id" OtherKey="messageid" Type="tbAttachmment" />
-      <Association Name="tbUser_tbMessage" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
       <Association Name="tbConversation_tbMessage" Member="tbConversation" ThisKey="conversationid" OtherKey="id" Type="tbConversation" IsForeignKey="true" />
+      <Association Name="tbUser_tbMessage" Member="tbUser" ThisKey="userid" OtherKey="id" Type="tbUser" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.tbUser_Friend" Member="tbUser_Friends">
-    <Type Name="tbUser_Friend">
-      <Column Name="user_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="friend_id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="tbFriend_tbUser_Friend" Member="tbFriend" ThisKey="friend_id" OtherKey="id" Type="tbFriend" IsForeignKey="true" />
-      <Association Name="tbUser_tbUser_Friend" Member="tbUser" ThisKey="user_id" OtherKey="id" Type="tbUser" IsForeignKey="true" />
+  <Table Name="dbo.tbUser" Member="tbUsers">
+    <Type Name="tbUser">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="account" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="password" Type="System.String" DbType="NChar(20)" CanBeNull="true" />
+      <Column Name="email" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="birth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="sex" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="nameshow" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="role" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Column Name="connectionid" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Column Name="onlinestatus" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pathimage" Type="System.String" DbType="NChar(200)" CanBeNull="true" />
+      <Column Name="md5confirm" Type="System.String" DbType="NChar(50)" CanBeNull="true" />
+      <Association Name="tbUser_tbUser_Friend" Member="tbUser_Friends" ThisKey="id" OtherKey="user_id" Type="tbUser_Friend" />
+      <Association Name="tbUser_tbConversation_User" Member="tbConversation_Users" ThisKey="id" OtherKey="userid" Type="tbConversation_User" />
+      <Association Name="tbUser_tbMessage" Member="tbMessages" ThisKey="id" OtherKey="userid" Type="tbMessage" />
     </Type>
   </Table>
   <Function Name="dbo.AddFriend" Method="AddFriend">

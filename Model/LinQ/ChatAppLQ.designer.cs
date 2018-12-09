@@ -33,9 +33,9 @@ namespace Model.LinQ
     partial void InserttbAttachmment(tbAttachmment instance);
     partial void UpdatetbAttachmment(tbAttachmment instance);
     partial void DeletetbAttachmment(tbAttachmment instance);
-    partial void InserttbUser(tbUser instance);
-    partial void UpdatetbUser(tbUser instance);
-    partial void DeletetbUser(tbUser instance);
+    partial void InserttbUser_Friend(tbUser_Friend instance);
+    partial void UpdatetbUser_Friend(tbUser_Friend instance);
+    partial void DeletetbUser_Friend(tbUser_Friend instance);
     partial void InserttbConversation(tbConversation instance);
     partial void UpdatetbConversation(tbConversation instance);
     partial void DeletetbConversation(tbConversation instance);
@@ -48,9 +48,9 @@ namespace Model.LinQ
     partial void InserttbMessage(tbMessage instance);
     partial void UpdatetbMessage(tbMessage instance);
     partial void DeletetbMessage(tbMessage instance);
-    partial void InserttbUser_Friend(tbUser_Friend instance);
-    partial void UpdatetbUser_Friend(tbUser_Friend instance);
-    partial void DeletetbUser_Friend(tbUser_Friend instance);
+    partial void InserttbUser(tbUser instance);
+    partial void UpdatetbUser(tbUser instance);
+    partial void DeletetbUser(tbUser instance);
     #endregion
 		
 		public ChatAppLQDataContext() : 
@@ -91,11 +91,11 @@ namespace Model.LinQ
 			}
 		}
 		
-		public System.Data.Linq.Table<tbUser> tbUsers
+		public System.Data.Linq.Table<tbUser_Friend> tbUser_Friends
 		{
 			get
 			{
-				return this.GetTable<tbUser>();
+				return this.GetTable<tbUser_Friend>();
 			}
 		}
 		
@@ -131,11 +131,11 @@ namespace Model.LinQ
 			}
 		}
 		
-		public System.Data.Linq.Table<tbUser_Friend> tbUser_Friends
+		public System.Data.Linq.Table<tbUser> tbUsers
 		{
 			get
 			{
-				return this.GetTable<tbUser_Friend>();
+				return this.GetTable<tbUser>();
 			}
 		}
 		
@@ -521,6 +521,986 @@ namespace Model.LinQ
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUser_Friend")]
+	public partial class tbUser_Friend : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _user_id;
+		
+		private string _friend_id;
+		
+		private EntityRef<tbFriend> _tbFriend;
+		
+		private EntityRef<tbUser> _tbUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onuser_idChanging(string value);
+    partial void Onuser_idChanged();
+    partial void Onfriend_idChanging(string value);
+    partial void Onfriend_idChanged();
+    #endregion
+		
+		public tbUser_Friend()
+		{
+			this._tbFriend = default(EntityRef<tbFriend>);
+			this._tbUser = default(EntityRef<tbUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string user_id
+		{
+			get
+			{
+				return this._user_id;
+			}
+			set
+			{
+				if ((this._user_id != value))
+				{
+					if (this._tbUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onuser_idChanging(value);
+					this.SendPropertyChanging();
+					this._user_id = value;
+					this.SendPropertyChanged("user_id");
+					this.Onuser_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_friend_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string friend_id
+		{
+			get
+			{
+				return this._friend_id;
+			}
+			set
+			{
+				if ((this._friend_id != value))
+				{
+					if (this._tbFriend.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onfriend_idChanging(value);
+					this.SendPropertyChanging();
+					this._friend_id = value;
+					this.SendPropertyChanged("friend_id");
+					this.Onfriend_idChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbFriend_tbUser_Friend", Storage="_tbFriend", ThisKey="friend_id", OtherKey="id", IsForeignKey=true)]
+		public tbFriend tbFriend
+		{
+			get
+			{
+				return this._tbFriend.Entity;
+			}
+			set
+			{
+				tbFriend previousValue = this._tbFriend.Entity;
+				if (((previousValue != value) 
+							|| (this._tbFriend.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbFriend.Entity = null;
+						previousValue.tbUser_Friends.Remove(this);
+					}
+					this._tbFriend.Entity = value;
+					if ((value != null))
+					{
+						value.tbUser_Friends.Add(this);
+						this._friend_id = value.id;
+					}
+					else
+					{
+						this._friend_id = default(string);
+					}
+					this.SendPropertyChanged("tbFriend");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbUser_Friend", Storage="_tbUser", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
+		public tbUser tbUser
+		{
+			get
+			{
+				return this._tbUser.Entity;
+			}
+			set
+			{
+				tbUser previousValue = this._tbUser.Entity;
+				if (((previousValue != value) 
+							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbUser.Entity = null;
+						previousValue.tbUser_Friends.Remove(this);
+					}
+					this._tbUser.Entity = value;
+					if ((value != null))
+					{
+						value.tbUser_Friends.Add(this);
+						this._user_id = value.id;
+					}
+					else
+					{
+						this._user_id = default(string);
+					}
+					this.SendPropertyChanged("tbUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbConversation")]
+	public partial class tbConversation : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _creationtime;
+		
+		private System.Nullable<System.DateTime> _lasttimemodified;
+		
+		private System.Nullable<bool> _isGroup;
+		
+		private EntitySet<tbConversation_User> _tbConversation_Users;
+		
+		private EntitySet<tbMessage> _tbMessages;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OncreationtimeChanging(System.Nullable<System.DateTime> value);
+    partial void OncreationtimeChanged();
+    partial void OnlasttimemodifiedChanging(System.Nullable<System.DateTime> value);
+    partial void OnlasttimemodifiedChanged();
+    partial void OnisGroupChanging(System.Nullable<bool> value);
+    partial void OnisGroupChanged();
+    #endregion
+		
+		public tbConversation()
+		{
+			this._tbConversation_Users = new EntitySet<tbConversation_User>(new Action<tbConversation_User>(this.attach_tbConversation_Users), new Action<tbConversation_User>(this.detach_tbConversation_Users));
+			this._tbMessages = new EntitySet<tbMessage>(new Action<tbMessage>(this.attach_tbMessages), new Action<tbMessage>(this.detach_tbMessages));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(30)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationtime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> creationtime
+		{
+			get
+			{
+				return this._creationtime;
+			}
+			set
+			{
+				if ((this._creationtime != value))
+				{
+					this.OncreationtimeChanging(value);
+					this.SendPropertyChanging();
+					this._creationtime = value;
+					this.SendPropertyChanged("creationtime");
+					this.OncreationtimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lasttimemodified", DbType="DateTime")]
+		public System.Nullable<System.DateTime> lasttimemodified
+		{
+			get
+			{
+				return this._lasttimemodified;
+			}
+			set
+			{
+				if ((this._lasttimemodified != value))
+				{
+					this.OnlasttimemodifiedChanging(value);
+					this.SendPropertyChanging();
+					this._lasttimemodified = value;
+					this.SendPropertyChanged("lasttimemodified");
+					this.OnlasttimemodifiedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isGroup", DbType="Bit")]
+		public System.Nullable<bool> isGroup
+		{
+			get
+			{
+				return this._isGroup;
+			}
+			set
+			{
+				if ((this._isGroup != value))
+				{
+					this.OnisGroupChanging(value);
+					this.SendPropertyChanging();
+					this._isGroup = value;
+					this.SendPropertyChanged("isGroup");
+					this.OnisGroupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbConversation_User", Storage="_tbConversation_Users", ThisKey="id", OtherKey="conversationid")]
+		public EntitySet<tbConversation_User> tbConversation_Users
+		{
+			get
+			{
+				return this._tbConversation_Users;
+			}
+			set
+			{
+				this._tbConversation_Users.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbMessage", Storage="_tbMessages", ThisKey="id", OtherKey="conversationid")]
+		public EntitySet<tbMessage> tbMessages
+		{
+			get
+			{
+				return this._tbMessages;
+			}
+			set
+			{
+				this._tbMessages.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbConversation_Users(tbConversation_User entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbConversation = this;
+		}
+		
+		private void detach_tbConversation_Users(tbConversation_User entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbConversation = null;
+		}
+		
+		private void attach_tbMessages(tbMessage entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbConversation = this;
+		}
+		
+		private void detach_tbMessages(tbMessage entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbConversation = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbConversation_User")]
+	public partial class tbConversation_User : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _conversationid;
+		
+		private string _userid;
+		
+		private System.Nullable<bool> _readstatus;
+		
+		private System.Nullable<bool> _active;
+		
+		private EntityRef<tbConversation> _tbConversation;
+		
+		private EntityRef<tbUser> _tbUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnconversationidChanging(string value);
+    partial void OnconversationidChanged();
+    partial void OnuseridChanging(string value);
+    partial void OnuseridChanged();
+    partial void OnreadstatusChanging(System.Nullable<bool> value);
+    partial void OnreadstatusChanged();
+    partial void OnactiveChanging(System.Nullable<bool> value);
+    partial void OnactiveChanged();
+    #endregion
+		
+		public tbConversation_User()
+		{
+			this._tbConversation = default(EntityRef<tbConversation>);
+			this._tbUser = default(EntityRef<tbUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string conversationid
+		{
+			get
+			{
+				return this._conversationid;
+			}
+			set
+			{
+				if ((this._conversationid != value))
+				{
+					if (this._tbConversation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnconversationidChanging(value);
+					this.SendPropertyChanging();
+					this._conversationid = value;
+					this.SendPropertyChanged("conversationid");
+					this.OnconversationidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string userid
+		{
+			get
+			{
+				return this._userid;
+			}
+			set
+			{
+				if ((this._userid != value))
+				{
+					if (this._tbUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnuseridChanging(value);
+					this.SendPropertyChanging();
+					this._userid = value;
+					this.SendPropertyChanged("userid");
+					this.OnuseridChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_readstatus", DbType="Bit")]
+		public System.Nullable<bool> readstatus
+		{
+			get
+			{
+				return this._readstatus;
+			}
+			set
+			{
+				if ((this._readstatus != value))
+				{
+					this.OnreadstatusChanging(value);
+					this.SendPropertyChanging();
+					this._readstatus = value;
+					this.SendPropertyChanged("readstatus");
+					this.OnreadstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
+		public System.Nullable<bool> active
+		{
+			get
+			{
+				return this._active;
+			}
+			set
+			{
+				if ((this._active != value))
+				{
+					this.OnactiveChanging(value);
+					this.SendPropertyChanging();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbConversation_User", Storage="_tbConversation", ThisKey="conversationid", OtherKey="id", IsForeignKey=true)]
+		public tbConversation tbConversation
+		{
+			get
+			{
+				return this._tbConversation.Entity;
+			}
+			set
+			{
+				tbConversation previousValue = this._tbConversation.Entity;
+				if (((previousValue != value) 
+							|| (this._tbConversation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbConversation.Entity = null;
+						previousValue.tbConversation_Users.Remove(this);
+					}
+					this._tbConversation.Entity = value;
+					if ((value != null))
+					{
+						value.tbConversation_Users.Add(this);
+						this._conversationid = value.id;
+					}
+					else
+					{
+						this._conversationid = default(string);
+					}
+					this.SendPropertyChanged("tbConversation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbConversation_User", Storage="_tbUser", ThisKey="userid", OtherKey="id", IsForeignKey=true)]
+		public tbUser tbUser
+		{
+			get
+			{
+				return this._tbUser.Entity;
+			}
+			set
+			{
+				tbUser previousValue = this._tbUser.Entity;
+				if (((previousValue != value) 
+							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbUser.Entity = null;
+						previousValue.tbConversation_Users.Remove(this);
+					}
+					this._tbUser.Entity = value;
+					if ((value != null))
+					{
+						value.tbConversation_Users.Add(this);
+						this._userid = value.id;
+					}
+					else
+					{
+						this._userid = default(string);
+					}
+					this.SendPropertyChanged("tbUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbFriend")]
+	public partial class tbFriend : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private string _status;
+		
+		private EntitySet<tbUser_Friend> _tbUser_Friends;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OnstatusChanging(string value);
+    partial void OnstatusChanged();
+    #endregion
+		
+		public tbFriend()
+		{
+			this._tbUser_Friends = new EntitySet<tbUser_Friend>(new Action<tbUser_Friend>(this.attach_tbUser_Friends), new Action<tbUser_Friend>(this.detach_tbUser_Friends));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NChar(10)")]
+		public string status
+		{
+			get
+			{
+				return this._status;
+			}
+			set
+			{
+				if ((this._status != value))
+				{
+					this.OnstatusChanging(value);
+					this.SendPropertyChanging();
+					this._status = value;
+					this.SendPropertyChanged("status");
+					this.OnstatusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbFriend_tbUser_Friend", Storage="_tbUser_Friends", ThisKey="id", OtherKey="friend_id")]
+		public EntitySet<tbUser_Friend> tbUser_Friends
+		{
+			get
+			{
+				return this._tbUser_Friends;
+			}
+			set
+			{
+				this._tbUser_Friends.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbUser_Friends(tbUser_Friend entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbFriend = this;
+		}
+		
+		private void detach_tbUser_Friends(tbUser_Friend entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbFriend = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbMessage")]
+	public partial class tbMessage : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private string _id;
+		
+		private System.Nullable<System.DateTime> _creationtime;
+		
+		private string _contents;
+		
+		private string _conversationid;
+		
+		private string _userid;
+		
+		private EntitySet<tbAttachmment> _tbAttachmments;
+		
+		private EntityRef<tbConversation> _tbConversation;
+		
+		private EntityRef<tbUser> _tbUser;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnidChanging(string value);
+    partial void OnidChanged();
+    partial void OncreationtimeChanging(System.Nullable<System.DateTime> value);
+    partial void OncreationtimeChanged();
+    partial void OncontentsChanging(string value);
+    partial void OncontentsChanged();
+    partial void OnconversationidChanging(string value);
+    partial void OnconversationidChanged();
+    partial void OnuseridChanging(string value);
+    partial void OnuseridChanged();
+    #endregion
+		
+		public tbMessage()
+		{
+			this._tbAttachmments = new EntitySet<tbAttachmment>(new Action<tbAttachmment>(this.attach_tbAttachmments), new Action<tbAttachmment>(this.detach_tbAttachmments));
+			this._tbConversation = default(EntityRef<tbConversation>);
+			this._tbUser = default(EntityRef<tbUser>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this.OnidChanging(value);
+					this.SendPropertyChanging();
+					this._id = value;
+					this.SendPropertyChanged("id");
+					this.OnidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationtime", DbType="DateTime")]
+		public System.Nullable<System.DateTime> creationtime
+		{
+			get
+			{
+				return this._creationtime;
+			}
+			set
+			{
+				if ((this._creationtime != value))
+				{
+					this.OncreationtimeChanging(value);
+					this.SendPropertyChanging();
+					this._creationtime = value;
+					this.SendPropertyChanged("creationtime");
+					this.OncreationtimeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contents", DbType="NVarChar(MAX)")]
+		public string contents
+		{
+			get
+			{
+				return this._contents;
+			}
+			set
+			{
+				if ((this._contents != value))
+				{
+					this.OncontentsChanging(value);
+					this.SendPropertyChanging();
+					this._contents = value;
+					this.SendPropertyChanged("contents");
+					this.OncontentsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10)")]
+		public string conversationid
+		{
+			get
+			{
+				return this._conversationid;
+			}
+			set
+			{
+				if ((this._conversationid != value))
+				{
+					if (this._tbConversation.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnconversationidChanging(value);
+					this.SendPropertyChanging();
+					this._conversationid = value;
+					this.SendPropertyChanged("conversationid");
+					this.OnconversationidChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10)")]
+		public string userid
+		{
+			get
+			{
+				return this._userid;
+			}
+			set
+			{
+				if ((this._userid != value))
+				{
+					if (this._tbUser.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.OnuseridChanging(value);
+					this.SendPropertyChanging();
+					this._userid = value;
+					this.SendPropertyChanged("userid");
+					this.OnuseridChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbMessage_tbAttachmment", Storage="_tbAttachmments", ThisKey="id", OtherKey="messageid")]
+		public EntitySet<tbAttachmment> tbAttachmments
+		{
+			get
+			{
+				return this._tbAttachmments;
+			}
+			set
+			{
+				this._tbAttachmments.Assign(value);
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbMessage", Storage="_tbConversation", ThisKey="conversationid", OtherKey="id", IsForeignKey=true)]
+		public tbConversation tbConversation
+		{
+			get
+			{
+				return this._tbConversation.Entity;
+			}
+			set
+			{
+				tbConversation previousValue = this._tbConversation.Entity;
+				if (((previousValue != value) 
+							|| (this._tbConversation.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbConversation.Entity = null;
+						previousValue.tbMessages.Remove(this);
+					}
+					this._tbConversation.Entity = value;
+					if ((value != null))
+					{
+						value.tbMessages.Add(this);
+						this._conversationid = value.id;
+					}
+					else
+					{
+						this._conversationid = default(string);
+					}
+					this.SendPropertyChanged("tbConversation");
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbMessage", Storage="_tbUser", ThisKey="userid", OtherKey="id", IsForeignKey=true)]
+		public tbUser tbUser
+		{
+			get
+			{
+				return this._tbUser.Entity;
+			}
+			set
+			{
+				tbUser previousValue = this._tbUser.Entity;
+				if (((previousValue != value) 
+							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._tbUser.Entity = null;
+						previousValue.tbMessages.Remove(this);
+					}
+					this._tbUser.Entity = value;
+					if ((value != null))
+					{
+						value.tbMessages.Add(this);
+						this._userid = value.id;
+					}
+					else
+					{
+						this._userid = default(string);
+					}
+					this.SendPropertyChanged("tbUser");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_tbAttachmments(tbAttachmment entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbMessage = this;
+		}
+		
+		private void detach_tbAttachmments(tbAttachmment entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbMessage = null;
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUser")]
 	public partial class tbUser : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -551,11 +1531,13 @@ namespace Model.LinQ
 		
 		private string _pathimage;
 		
+		private string _md5confirm;
+		
+		private EntitySet<tbUser_Friend> _tbUser_Friends;
+		
 		private EntitySet<tbConversation_User> _tbConversation_Users;
 		
 		private EntitySet<tbMessage> _tbMessages;
-		
-		private EntitySet<tbUser_Friend> _tbUser_Friends;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -585,13 +1567,15 @@ namespace Model.LinQ
     partial void OnonlinestatusChanged();
     partial void OnpathimageChanging(string value);
     partial void OnpathimageChanged();
+    partial void Onmd5confirmChanging(string value);
+    partial void Onmd5confirmChanged();
     #endregion
 		
 		public tbUser()
 		{
+			this._tbUser_Friends = new EntitySet<tbUser_Friend>(new Action<tbUser_Friend>(this.attach_tbUser_Friends), new Action<tbUser_Friend>(this.detach_tbUser_Friends));
 			this._tbConversation_Users = new EntitySet<tbConversation_User>(new Action<tbConversation_User>(this.attach_tbConversation_Users), new Action<tbConversation_User>(this.detach_tbConversation_Users));
 			this._tbMessages = new EntitySet<tbMessage>(new Action<tbMessage>(this.attach_tbMessages), new Action<tbMessage>(this.detach_tbMessages));
-			this._tbUser_Friends = new EntitySet<tbUser_Friend>(new Action<tbUser_Friend>(this.attach_tbUser_Friends), new Action<tbUser_Friend>(this.detach_tbUser_Friends));
 			OnCreated();
 		}
 		
@@ -815,7 +1799,7 @@ namespace Model.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pathimage", DbType="NChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pathimage", DbType="NChar(200)")]
 		public string pathimage
 		{
 			get
@@ -832,6 +1816,39 @@ namespace Model.LinQ
 					this.SendPropertyChanged("pathimage");
 					this.OnpathimageChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_md5confirm", DbType="NChar(50)")]
+		public string md5confirm
+		{
+			get
+			{
+				return this._md5confirm;
+			}
+			set
+			{
+				if ((this._md5confirm != value))
+				{
+					this.Onmd5confirmChanging(value);
+					this.SendPropertyChanging();
+					this._md5confirm = value;
+					this.SendPropertyChanged("md5confirm");
+					this.Onmd5confirmChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbUser_Friend", Storage="_tbUser_Friends", ThisKey="id", OtherKey="user_id")]
+		public EntitySet<tbUser_Friend> tbUser_Friends
+		{
+			get
+			{
+				return this._tbUser_Friends;
+			}
+			set
+			{
+				this._tbUser_Friends.Assign(value);
 			}
 		}
 		
@@ -861,19 +1878,6 @@ namespace Model.LinQ
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbUser_Friend", Storage="_tbUser_Friends", ThisKey="id", OtherKey="user_id")]
-		public EntitySet<tbUser_Friend> tbUser_Friends
-		{
-			get
-			{
-				return this._tbUser_Friends;
-			}
-			set
-			{
-				this._tbUser_Friends.Assign(value);
-			}
-		}
-		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -892,6 +1896,18 @@ namespace Model.LinQ
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_tbUser_Friends(tbUser_Friend entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUser = this;
+		}
+		
+		private void detach_tbUser_Friends(tbUser_Friend entity)
+		{
+			this.SendPropertyChanging();
+			entity.tbUser = null;
 		}
 		
 		private void attach_tbConversation_Users(tbConversation_User entity)
@@ -916,998 +1932,6 @@ namespace Model.LinQ
 		{
 			this.SendPropertyChanging();
 			entity.tbUser = null;
-		}
-		
-		private void attach_tbUser_Friends(tbUser_Friend entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUser = this;
-		}
-		
-		private void detach_tbUser_Friends(tbUser_Friend entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbUser = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbConversation")]
-	public partial class tbConversation : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _id;
-		
-		private string _name;
-		
-		private System.Nullable<System.DateTime> _creationtime;
-		
-		private System.Nullable<System.DateTime> _lasttimemodified;
-		
-		private System.Nullable<bool> _isGroup;
-		
-		private EntitySet<tbConversation_User> _tbConversation_Users;
-		
-		private EntitySet<tbMessage> _tbMessages;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OncreationtimeChanging(System.Nullable<System.DateTime> value);
-    partial void OncreationtimeChanged();
-    partial void OnlasttimemodifiedChanging(System.Nullable<System.DateTime> value);
-    partial void OnlasttimemodifiedChanged();
-    partial void OnisGroupChanging(System.Nullable<bool> value);
-    partial void OnisGroupChanged();
-    #endregion
-		
-		public tbConversation()
-		{
-			this._tbConversation_Users = new EntitySet<tbConversation_User>(new Action<tbConversation_User>(this.attach_tbConversation_Users), new Action<tbConversation_User>(this.detach_tbConversation_Users));
-			this._tbMessages = new EntitySet<tbMessage>(new Action<tbMessage>(this.attach_tbMessages), new Action<tbMessage>(this.detach_tbMessages));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NChar(10)")]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this.OnnameChanging(value);
-					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationtime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> creationtime
-		{
-			get
-			{
-				return this._creationtime;
-			}
-			set
-			{
-				if ((this._creationtime != value))
-				{
-					this.OncreationtimeChanging(value);
-					this.SendPropertyChanging();
-					this._creationtime = value;
-					this.SendPropertyChanged("creationtime");
-					this.OncreationtimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_lasttimemodified", DbType="DateTime")]
-		public System.Nullable<System.DateTime> lasttimemodified
-		{
-			get
-			{
-				return this._lasttimemodified;
-			}
-			set
-			{
-				if ((this._lasttimemodified != value))
-				{
-					this.OnlasttimemodifiedChanging(value);
-					this.SendPropertyChanging();
-					this._lasttimemodified = value;
-					this.SendPropertyChanged("lasttimemodified");
-					this.OnlasttimemodifiedChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_isGroup", DbType="Bit")]
-		public System.Nullable<bool> isGroup
-		{
-			get
-			{
-				return this._isGroup;
-			}
-			set
-			{
-				if ((this._isGroup != value))
-				{
-					this.OnisGroupChanging(value);
-					this.SendPropertyChanging();
-					this._isGroup = value;
-					this.SendPropertyChanged("isGroup");
-					this.OnisGroupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbConversation_User", Storage="_tbConversation_Users", ThisKey="id", OtherKey="conversationid")]
-		public EntitySet<tbConversation_User> tbConversation_Users
-		{
-			get
-			{
-				return this._tbConversation_Users;
-			}
-			set
-			{
-				this._tbConversation_Users.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbMessage", Storage="_tbMessages", ThisKey="id", OtherKey="conversationid")]
-		public EntitySet<tbMessage> tbMessages
-		{
-			get
-			{
-				return this._tbMessages;
-			}
-			set
-			{
-				this._tbMessages.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbConversation_Users(tbConversation_User entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbConversation = this;
-		}
-		
-		private void detach_tbConversation_Users(tbConversation_User entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbConversation = null;
-		}
-		
-		private void attach_tbMessages(tbMessage entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbConversation = this;
-		}
-		
-		private void detach_tbMessages(tbMessage entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbConversation = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbConversation_User")]
-	public partial class tbConversation_User : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _conversationid;
-		
-		private string _userid;
-		
-		private System.Nullable<bool> _readstatus;
-		
-		private System.Nullable<bool> _active;
-		
-		private EntityRef<tbUser> _tbUser;
-		
-		private EntityRef<tbConversation> _tbConversation;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnconversationidChanging(string value);
-    partial void OnconversationidChanged();
-    partial void OnuseridChanging(string value);
-    partial void OnuseridChanged();
-    partial void OnreadstatusChanging(System.Nullable<bool> value);
-    partial void OnreadstatusChanged();
-    partial void OnactiveChanging(System.Nullable<bool> value);
-    partial void OnactiveChanged();
-    #endregion
-		
-		public tbConversation_User()
-		{
-			this._tbUser = default(EntityRef<tbUser>);
-			this._tbConversation = default(EntityRef<tbConversation>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string conversationid
-		{
-			get
-			{
-				return this._conversationid;
-			}
-			set
-			{
-				if ((this._conversationid != value))
-				{
-					if (this._tbConversation.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnconversationidChanging(value);
-					this.SendPropertyChanging();
-					this._conversationid = value;
-					this.SendPropertyChanged("conversationid");
-					this.OnconversationidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string userid
-		{
-			get
-			{
-				return this._userid;
-			}
-			set
-			{
-				if ((this._userid != value))
-				{
-					if (this._tbUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnuseridChanging(value);
-					this.SendPropertyChanging();
-					this._userid = value;
-					this.SendPropertyChanged("userid");
-					this.OnuseridChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_readstatus", DbType="Bit")]
-		public System.Nullable<bool> readstatus
-		{
-			get
-			{
-				return this._readstatus;
-			}
-			set
-			{
-				if ((this._readstatus != value))
-				{
-					this.OnreadstatusChanging(value);
-					this.SendPropertyChanging();
-					this._readstatus = value;
-					this.SendPropertyChanged("readstatus");
-					this.OnreadstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit")]
-		public System.Nullable<bool> active
-		{
-			get
-			{
-				return this._active;
-			}
-			set
-			{
-				if ((this._active != value))
-				{
-					this.OnactiveChanging(value);
-					this.SendPropertyChanging();
-					this._active = value;
-					this.SendPropertyChanged("active");
-					this.OnactiveChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbConversation_User", Storage="_tbUser", ThisKey="userid", OtherKey="id", IsForeignKey=true)]
-		public tbUser tbUser
-		{
-			get
-			{
-				return this._tbUser.Entity;
-			}
-			set
-			{
-				tbUser previousValue = this._tbUser.Entity;
-				if (((previousValue != value) 
-							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbUser.Entity = null;
-						previousValue.tbConversation_Users.Remove(this);
-					}
-					this._tbUser.Entity = value;
-					if ((value != null))
-					{
-						value.tbConversation_Users.Add(this);
-						this._userid = value.id;
-					}
-					else
-					{
-						this._userid = default(string);
-					}
-					this.SendPropertyChanged("tbUser");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbConversation_User", Storage="_tbConversation", ThisKey="conversationid", OtherKey="id", IsForeignKey=true)]
-		public tbConversation tbConversation
-		{
-			get
-			{
-				return this._tbConversation.Entity;
-			}
-			set
-			{
-				tbConversation previousValue = this._tbConversation.Entity;
-				if (((previousValue != value) 
-							|| (this._tbConversation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbConversation.Entity = null;
-						previousValue.tbConversation_Users.Remove(this);
-					}
-					this._tbConversation.Entity = value;
-					if ((value != null))
-					{
-						value.tbConversation_Users.Add(this);
-						this._conversationid = value.id;
-					}
-					else
-					{
-						this._conversationid = default(string);
-					}
-					this.SendPropertyChanged("tbConversation");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbFriend")]
-	public partial class tbFriend : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _id;
-		
-		private string _status;
-		
-		private EntitySet<tbUser_Friend> _tbUser_Friends;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OnstatusChanging(string value);
-    partial void OnstatusChanged();
-    #endregion
-		
-		public tbFriend()
-		{
-			this._tbUser_Friends = new EntitySet<tbUser_Friend>(new Action<tbUser_Friend>(this.attach_tbUser_Friends), new Action<tbUser_Friend>(this.detach_tbUser_Friends));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status", DbType="NChar(10)")]
-		public string status
-		{
-			get
-			{
-				return this._status;
-			}
-			set
-			{
-				if ((this._status != value))
-				{
-					this.OnstatusChanging(value);
-					this.SendPropertyChanging();
-					this._status = value;
-					this.SendPropertyChanged("status");
-					this.OnstatusChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbFriend_tbUser_Friend", Storage="_tbUser_Friends", ThisKey="id", OtherKey="friend_id")]
-		public EntitySet<tbUser_Friend> tbUser_Friends
-		{
-			get
-			{
-				return this._tbUser_Friends;
-			}
-			set
-			{
-				this._tbUser_Friends.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbUser_Friends(tbUser_Friend entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbFriend = this;
-		}
-		
-		private void detach_tbUser_Friends(tbUser_Friend entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbFriend = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbMessage")]
-	public partial class tbMessage : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _id;
-		
-		private System.Nullable<System.DateTime> _creationtime;
-		
-		private string _contents;
-		
-		private string _conversationid;
-		
-		private string _userid;
-		
-		private EntitySet<tbAttachmment> _tbAttachmments;
-		
-		private EntityRef<tbUser> _tbUser;
-		
-		private EntityRef<tbConversation> _tbConversation;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnidChanging(string value);
-    partial void OnidChanged();
-    partial void OncreationtimeChanging(System.Nullable<System.DateTime> value);
-    partial void OncreationtimeChanged();
-    partial void OncontentsChanging(string value);
-    partial void OncontentsChanged();
-    partial void OnconversationidChanging(string value);
-    partial void OnconversationidChanged();
-    partial void OnuseridChanging(string value);
-    partial void OnuseridChanged();
-    #endregion
-		
-		public tbMessage()
-		{
-			this._tbAttachmments = new EntitySet<tbAttachmment>(new Action<tbAttachmment>(this.attach_tbAttachmments), new Action<tbAttachmment>(this.detach_tbAttachmments));
-			this._tbUser = default(EntityRef<tbUser>);
-			this._tbConversation = default(EntityRef<tbConversation>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string id
-		{
-			get
-			{
-				return this._id;
-			}
-			set
-			{
-				if ((this._id != value))
-				{
-					this.OnidChanging(value);
-					this.SendPropertyChanging();
-					this._id = value;
-					this.SendPropertyChanged("id");
-					this.OnidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creationtime", DbType="DateTime")]
-		public System.Nullable<System.DateTime> creationtime
-		{
-			get
-			{
-				return this._creationtime;
-			}
-			set
-			{
-				if ((this._creationtime != value))
-				{
-					this.OncreationtimeChanging(value);
-					this.SendPropertyChanging();
-					this._creationtime = value;
-					this.SendPropertyChanged("creationtime");
-					this.OncreationtimeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_contents", DbType="NVarChar(MAX)")]
-		public string contents
-		{
-			get
-			{
-				return this._contents;
-			}
-			set
-			{
-				if ((this._contents != value))
-				{
-					this.OncontentsChanging(value);
-					this.SendPropertyChanging();
-					this._contents = value;
-					this.SendPropertyChanged("contents");
-					this.OncontentsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_conversationid", DbType="NChar(10)")]
-		public string conversationid
-		{
-			get
-			{
-				return this._conversationid;
-			}
-			set
-			{
-				if ((this._conversationid != value))
-				{
-					if (this._tbConversation.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnconversationidChanging(value);
-					this.SendPropertyChanging();
-					this._conversationid = value;
-					this.SendPropertyChanged("conversationid");
-					this.OnconversationidChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_userid", DbType="NChar(10)")]
-		public string userid
-		{
-			get
-			{
-				return this._userid;
-			}
-			set
-			{
-				if ((this._userid != value))
-				{
-					if (this._tbUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnuseridChanging(value);
-					this.SendPropertyChanging();
-					this._userid = value;
-					this.SendPropertyChanged("userid");
-					this.OnuseridChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbMessage_tbAttachmment", Storage="_tbAttachmments", ThisKey="id", OtherKey="messageid")]
-		public EntitySet<tbAttachmment> tbAttachmments
-		{
-			get
-			{
-				return this._tbAttachmments;
-			}
-			set
-			{
-				this._tbAttachmments.Assign(value);
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbMessage", Storage="_tbUser", ThisKey="userid", OtherKey="id", IsForeignKey=true)]
-		public tbUser tbUser
-		{
-			get
-			{
-				return this._tbUser.Entity;
-			}
-			set
-			{
-				tbUser previousValue = this._tbUser.Entity;
-				if (((previousValue != value) 
-							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbUser.Entity = null;
-						previousValue.tbMessages.Remove(this);
-					}
-					this._tbUser.Entity = value;
-					if ((value != null))
-					{
-						value.tbMessages.Add(this);
-						this._userid = value.id;
-					}
-					else
-					{
-						this._userid = default(string);
-					}
-					this.SendPropertyChanged("tbUser");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbConversation_tbMessage", Storage="_tbConversation", ThisKey="conversationid", OtherKey="id", IsForeignKey=true)]
-		public tbConversation tbConversation
-		{
-			get
-			{
-				return this._tbConversation.Entity;
-			}
-			set
-			{
-				tbConversation previousValue = this._tbConversation.Entity;
-				if (((previousValue != value) 
-							|| (this._tbConversation.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbConversation.Entity = null;
-						previousValue.tbMessages.Remove(this);
-					}
-					this._tbConversation.Entity = value;
-					if ((value != null))
-					{
-						value.tbMessages.Add(this);
-						this._conversationid = value.id;
-					}
-					else
-					{
-						this._conversationid = default(string);
-					}
-					this.SendPropertyChanged("tbConversation");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_tbAttachmments(tbAttachmment entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbMessage = this;
-		}
-		
-		private void detach_tbAttachmments(tbAttachmment entity)
-		{
-			this.SendPropertyChanging();
-			entity.tbMessage = null;
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUser_Friend")]
-	public partial class tbUser_Friend : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private string _user_id;
-		
-		private string _friend_id;
-		
-		private EntityRef<tbFriend> _tbFriend;
-		
-		private EntityRef<tbUser> _tbUser;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onuser_idChanging(string value);
-    partial void Onuser_idChanged();
-    partial void Onfriend_idChanging(string value);
-    partial void Onfriend_idChanged();
-    #endregion
-		
-		public tbUser_Friend()
-		{
-			this._tbFriend = default(EntityRef<tbFriend>);
-			this._tbUser = default(EntityRef<tbUser>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_user_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string user_id
-		{
-			get
-			{
-				return this._user_id;
-			}
-			set
-			{
-				if ((this._user_id != value))
-				{
-					if (this._tbUser.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onuser_idChanging(value);
-					this.SendPropertyChanging();
-					this._user_id = value;
-					this.SendPropertyChanged("user_id");
-					this.Onuser_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_friend_id", DbType="NChar(10) NOT NULL", CanBeNull=false, IsPrimaryKey=true)]
-		public string friend_id
-		{
-			get
-			{
-				return this._friend_id;
-			}
-			set
-			{
-				if ((this._friend_id != value))
-				{
-					if (this._tbFriend.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onfriend_idChanging(value);
-					this.SendPropertyChanging();
-					this._friend_id = value;
-					this.SendPropertyChanged("friend_id");
-					this.Onfriend_idChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbFriend_tbUser_Friend", Storage="_tbFriend", ThisKey="friend_id", OtherKey="id", IsForeignKey=true)]
-		public tbFriend tbFriend
-		{
-			get
-			{
-				return this._tbFriend.Entity;
-			}
-			set
-			{
-				tbFriend previousValue = this._tbFriend.Entity;
-				if (((previousValue != value) 
-							|| (this._tbFriend.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbFriend.Entity = null;
-						previousValue.tbUser_Friends.Remove(this);
-					}
-					this._tbFriend.Entity = value;
-					if ((value != null))
-					{
-						value.tbUser_Friends.Add(this);
-						this._friend_id = value.id;
-					}
-					else
-					{
-						this._friend_id = default(string);
-					}
-					this.SendPropertyChanged("tbFriend");
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbUser_Friend", Storage="_tbUser", ThisKey="user_id", OtherKey="id", IsForeignKey=true)]
-		public tbUser tbUser
-		{
-			get
-			{
-				return this._tbUser.Entity;
-			}
-			set
-			{
-				tbUser previousValue = this._tbUser.Entity;
-				if (((previousValue != value) 
-							|| (this._tbUser.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._tbUser.Entity = null;
-						previousValue.tbUser_Friends.Remove(this);
-					}
-					this._tbUser.Entity = value;
-					if ((value != null))
-					{
-						value.tbUser_Friends.Add(this);
-						this._user_id = value.id;
-					}
-					else
-					{
-						this._user_id = default(string);
-					}
-					this.SendPropertyChanged("tbUser");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
 		}
 	}
 	

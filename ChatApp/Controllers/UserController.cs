@@ -16,6 +16,7 @@ namespace ChatApp.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult Login(LoginModel loginModel)
         {
             if (ModelState.IsValid)

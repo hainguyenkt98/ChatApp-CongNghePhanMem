@@ -31,7 +31,7 @@ namespace Model.Dao
                 return profile;
             }
         }
-        public void SaveChange(string userid, string pathImage, string nameshow, string email, string birthdate, string password)
+        public void SaveChange(string userid, string pathImage, string nameshow, string email, string birthdate, string password,string md5)
         {
             using (ChatAppLQDataContext context = new ChatAppLQDataContext())
             {
@@ -46,6 +46,7 @@ namespace Model.Dao
                 user.email = email;
                 user.birth = Convert.ToDateTime(birthdate);
                 user.password = password;
+                user.md5confirm = md5;
                 context.SubmitChanges();
             }
         }

@@ -91,8 +91,8 @@ namespace ChatApp.Controllers
             }
 
             UserLogin userLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
-
-            profileDao.SaveChange(userLogin.Id.Trim(), "/ImagesProfile/" + filename, nameshow.Trim(), email.Trim(), birthdate.Trim(), password.Trim());
+            string md5 = UserDao.GetMD5(userLogin.Username.Trim() + password.Trim());
+            profileDao.SaveChange(userLogin.Id.Trim(), "/ImagesProfile/" + filename, nameshow.Trim(), email.Trim(), birthdate.Trim(), password.Trim(), md5);
 
             UserDao usDao = new UserDao();
 

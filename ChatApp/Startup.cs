@@ -13,6 +13,11 @@ namespace ChatApp
         {
             // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=316888
             app.MapSignalR();
+            //var hubConfiguration = new Microsoft.AspNet.SignalR.HubConfiguration();
+            //hubConfiguration.EnableDetailedErrors = true;
+            //hubConfiguration.EnableJavaScriptProxies = true;
+
+            //app.MapSignalR("/ChatApp", hubConfiguration);
         }
     }
 }

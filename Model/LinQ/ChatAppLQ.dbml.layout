@@ -1,96 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9" name="ChatAppLQ">
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.875" name="ChatAppLQ">
   <DataContextMoniker Name="/ChatAppLQDataContext" />
   <nestedChildShapes>
-    <classShape Id="f79b2ff1-5924-4101-b35d-dad546d50d69" absoluteBounds="6.25, 6.625, 2, 1.7708968098958318">
+    <classShape Id="fef98069-a141-4ecc-871a-3aaa0607eb91" absoluteBounds="6.25, 7.5, 2, 1.7708968098958327">
       <DataClassMoniker Name="/ChatAppLQDataContext/tbAttachmment" />
       <nestedChildShapes>
-        <elementListCompartment Id="88c53b30-f0b9-487a-8492-a5f98f42d3a5" absoluteBounds="6.265, 7.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="4c50ceda-cb39-4254-8b5e-4be4520aea2f" absoluteBounds="6.265, 7.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="7c7c5e79-b0c2-46aa-9eee-2a17a13517f8" absoluteBounds="0.75, 3, 2, 3.1170068359375005">
-      <DataClassMoniker Name="/ChatAppLQDataContext/tbUser" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7610d0d4-20ff-456f-8e86-2ec33310d909" absoluteBounds="0.765, 3.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="be211466-4b46-4e0e-88de-2ba07869400b" absoluteBounds="0.75, 7, 2, 1.7708968098958318">
-      <DataClassMoniker Name="/ChatAppLQDataContext/tbConversation" />
-      <nestedChildShapes>
-        <elementListCompartment Id="e7365930-4ef1-4502-a076-8b2f77530dc0" absoluteBounds="0.765, 7.46, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d02cdb51-556b-48f1-865a-08964253850d" absoluteBounds="3.5, 0.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/ChatAppLQDataContext/tbConversation_User" />
-      <nestedChildShapes>
-        <elementListCompartment Id="ee2a9c99-8ae0-477e-8e3c-c964facd952a" absoluteBounds="3.515, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="d36d97f8-6480-41fd-a001-a2eae1bb00b1" absoluteBounds="0.75, 1, 2, 1.1939925130208335">
-      <DataClassMoniker Name="/ChatAppLQDataContext/tbFriend" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c2ae4049-6091-47a4-868a-c04733299a5c" absoluteBounds="0.765, 1.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="bc4c3781-f304-4816-be18-c6d48317941b" absoluteBounds="3.5, 6.625, 2, 1.7708968098958318">
-      <DataClassMoniker Name="/ChatAppLQDataContext/tbMessage" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3d556de3-687a-4538-8fde-abb3bff2d977" absoluteBounds="3.515, 7.085, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="823f94d5-9d46-4af8-9259-4a18836a3c3c" absoluteBounds="3.5, 4, 2, 1.1939925130208331">
+    <classShape Id="346c7a14-834b-4e7e-8b44-baa3cb407aa4" absoluteBounds="3.5, 4.75, 2, 1.1939925130208327">
       <DataClassMoniker Name="/ChatAppLQDataContext/tbUser_Friend" />
       <nestedChildShapes>
-        <elementListCompartment Id="1d46c782-db87-4bba-bba6-a9c42f0dd5a8" absoluteBounds="3.515, 4.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="7aae53ff-b597-4f3f-a2b6-3a2b55d0ad98" absoluteBounds="3.515, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(2.75 : 3); (3.125 : 2.625); (3.125 : 1.53929768880208); (3.5 : 1.53929768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChatAppLQDataContext/tbUser/tbUser_tbConversation_User" />
-      <nodes>
-        <classShapeMoniker Id="7c7c5e79-b0c2-46aa-9eee-2a17a13517f8" />
-        <classShapeMoniker Id="d02cdb51-556b-48f1-865a-08964253850d" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.0612992741887); (3.3125 : 6.4987992741887); (3.3125 : 1.96519853320312); (3.5 : 1.96519853320312)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <classShape Id="0fc432bb-b64e-4b25-b676-95b4815af533" absoluteBounds="0.75, 7.875, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ChatAppLQDataContext/tbConversation" />
+      <nestedChildShapes>
+        <elementListCompartment Id="af2d527e-ec0c-445a-946f-e8912d901f30" absoluteBounds="0.765, 8.335, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="30fbe2ea-6809-4d26-b3a2-8aac8569236a" absoluteBounds="3.5, 1.5, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/ChatAppLQDataContext/tbConversation_User" />
+      <nestedChildShapes>
+        <elementListCompartment Id="ada9ea5e-f30c-46e8-9b82-d5cc0510c2ae" absoluteBounds="3.515, 1.96, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="452daeb4-33b2-495b-9dc9-a2f796fc86a0" absoluteBounds="0.75, 0.75, 2, 1.1939925130208335">
+      <DataClassMoniker Name="/ChatAppLQDataContext/tbFriend" />
+      <nestedChildShapes>
+        <elementListCompartment Id="413bc2e7-843a-4ac7-844c-67b336a73878" absoluteBounds="0.765, 1.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="97bcb640-94e3-4a63-9df8-fee9f76c18a2" absoluteBounds="3.5, 7.5, 2, 1.7708968098958327">
+      <DataClassMoniker Name="/ChatAppLQDataContext/tbMessage" />
+      <nestedChildShapes>
+        <elementListCompartment Id="7bdf1ff8-86f1-4430-80ad-04888b0354df" absoluteBounds="3.515, 7.96, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="6ab4267e-cf41-45d1-8452-8d6e6fb9bd94" absoluteBounds="0.75, 3.75, 2, 3.309308268229167">
+      <DataClassMoniker Name="/ChatAppLQDataContext/tbUser" />
+      <nestedChildShapes>
+        <elementListCompartment Id="48eb94ee-1197-4b91-aeaf-16669e450ca4" absoluteBounds="0.765, 4.21, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 7.875); (3.125 : 7.5); (3.125 : 2.28929768880208); (3.5 : 2.28929768880208)]" fixedFrom="NotFixed" fixedTo="Algorithm">
       <AssociationMoniker Name="/ChatAppLQDataContext/tbConversation/tbConversation_tbConversation_User" />
       <nodes>
-        <classShapeMoniker Id="be211466-4b46-4e0e-88de-2ba07869400b" />
-        <classShapeMoniker Id="d02cdb51-556b-48f1-865a-08964253850d" />
+        <classShapeMoniker Id="0fc432bb-b64e-4b25-b676-95b4815af533" />
+        <classShapeMoniker Id="30fbe2ea-6809-4d26-b3a2-8aac8569236a" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 7.51044840494792); (6.25 : 7.51044840494792)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChatAppLQDataContext/tbMessage/tbMessage_tbAttachmment" />
-      <nodes>
-        <classShapeMoniker Id="bc4c3781-f304-4816-be18-c6d48317941b" />
-        <classShapeMoniker Id="f79b2ff1-5924-4101-b35d-dad546d50d69" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 6.1170068359375); (3.125 : 6.4920068359375); (3.125 : 6.25); (3.5 : 6.625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChatAppLQDataContext/tbUser/tbUser_tbMessage" />
-      <nodes>
-        <classShapeMoniker Id="7c7c5e79-b0c2-46aa-9eee-2a17a13517f8" />
-        <classShapeMoniker Id="bc4c3781-f304-4816-be18-c6d48317941b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 7.75985054204227); (3.5 : 7.75985054204227)]" fixedFrom="NotFixed" fixedTo="NotFixed">
-      <AssociationMoniker Name="/ChatAppLQDataContext/tbConversation/tbConversation_tbMessage" />
-      <nodes>
-        <classShapeMoniker Id="be211466-4b46-4e0e-88de-2ba07869400b" />
-        <classShapeMoniker Id="bc4c3781-f304-4816-be18-c6d48317941b" />
-      </nodes>
-    </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.16276401652644); (3.06607443490112 : 2.47883845142756 : JumpStart); (3.18392556509888 : 2.59668958162532 : JumpEnd); (3.25357443490112 : 2.66633845142756 : JumpStart); (3.37142556509888 : 2.78418958162532 : JumpEnd); (3.53125 : 2.94401401652644); (3.53125 : 4.03125); (3.5 : 4)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(2.75 : 1.91276401652644); (3.28125 : 2.44401401652644); (3.28125 : 4.53033254422075); (3.50091745577925 : 4.75)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/ChatAppLQDataContext/tbFriend/tbFriend_tbUser_Friend" />
       <nodes>
-        <classShapeMoniker Id="d36d97f8-6480-41fd-a001-a2eae1bb00b1" />
-        <classShapeMoniker Id="823f94d5-9d46-4af8-9259-4a18836a3c3c" />
+        <classShapeMoniker Id="452daeb4-33b2-495b-9dc9-a2f796fc86a0" />
+        <classShapeMoniker Id="346c7a14-834b-4e7e-8b44-baa3cb407aa4" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 4.62824875651042); (3.22916666666667 : 4.62824875651042 : JumpStart); (3.39583333333333 : 4.62824875651042 : JumpEnd); (3.5 : 4.62824875651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+    <associationConnector edgePoints="[(5.5 : 8.38544840494792); (6.25 : 8.38544840494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChatAppLQDataContext/tbMessage/tbMessage_tbAttachmment" />
+      <nodes>
+        <classShapeMoniker Id="97bcb640-94e3-4a63-9df8-fee9f76c18a2" />
+        <classShapeMoniker Id="fef98069-a141-4ecc-871a-3aaa0607eb91" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 8.60420090494792); (3.5 : 8.60420090494792)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChatAppLQDataContext/tbConversation/tbConversation_tbMessage" />
+      <nodes>
+        <classShapeMoniker Id="0fc432bb-b64e-4b25-b676-95b4815af533" />
+        <classShapeMoniker Id="97bcb640-94e3-4a63-9df8-fee9f76c18a2" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 5.34699625651042); (3.04166666666667 : 5.34699625651042 : JumpStart); (3.20833333333333 : 5.34699625651042 : JumpEnd); (3.5 : 5.34699625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/ChatAppLQDataContext/tbUser/tbUser_tbUser_Friend" />
       <nodes>
-        <classShapeMoniker Id="7c7c5e79-b0c2-46aa-9eee-2a17a13517f8" />
-        <classShapeMoniker Id="823f94d5-9d46-4af8-9259-4a18836a3c3c" />
+        <classShapeMoniker Id="6ab4267e-cf41-45d1-8452-8d6e6fb9bd94" />
+        <classShapeMoniker Id="346c7a14-834b-4e7e-8b44-baa3cb407aa4" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 3.81153746153846); (3.06607443490112 : 3.49546302663734 : JumpStart); (3.18392556509888 : 3.37761189643958 : JumpEnd); (3.1875 : 3.37403746153846); (3.1875 : 2.71519853320312); (3.19791666666667 : 2.71519853320312 : JumpStart); (3.36458333333333 : 2.71519853320312 : JumpEnd); (3.5 : 2.71519853320312)]" fixedFrom="NotFixed" fixedTo="Algorithm">
+      <AssociationMoniker Name="/ChatAppLQDataContext/tbUser/tbUser_tbConversation_User" />
+      <nodes>
+        <classShapeMoniker Id="6ab4267e-cf41-45d1-8452-8d6e6fb9bd94" />
+        <classShapeMoniker Id="30fbe2ea-6809-4d26-b3a2-8aac8569236a" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 6.99776880669071); (3.06607443490112 : 7.31384324159183 : JumpStart); (3.18392556509888 : 7.43169437178958 : JumpEnd); (3.3125 : 7.56026880669071); (3.3125 : 7.3125); (3.5 : 7.5)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/ChatAppLQDataContext/tbUser/tbUser_tbMessage" />
+      <nodes>
+        <classShapeMoniker Id="6ab4267e-cf41-45d1-8452-8d6e6fb9bd94" />
+        <classShapeMoniker Id="97bcb640-94e3-4a63-9df8-fee9f76c18a2" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
