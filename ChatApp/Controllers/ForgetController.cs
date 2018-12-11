@@ -29,13 +29,15 @@ namespace ChatApp.Controllers
                 if (userDao.CheckEmailForgotPassword(model.Email.Trim()))
                 {
                     var us = userDao.GetUserFromEmail(model.Email);
-                    string senderID = "hainguyenkt98@gmail.com";
-                    string senderPassword = "77181352";
+                    string senderID = "hktchat@gmail.com";
+                    string senderPassword = "Hai77181352";
                     string md5Confirm = us.md5confirm.Trim();
 
-                    string body = string.Format("Chào {0} <BR/> Tài khoản của bạn được yêu cầu lấy lại mật khẩu, vui lòng click vào " +
-                        "link dưới đây để thay đổi mật khẩu mới : \"{1}\" ",
-            us.nameshow.Trim(), Url.Action("ConfirmEmail", "Forget", new { md5Confirm = md5Confirm.Trim(), email = model.Email.Trim() }, Request.Url.Scheme));
+                    string body = string.Format("Chào {0} <BR/> Tài khoản của bạn được yêu cầu lấy lại mật khẩu, vui lòng click " +
+                       " <a href = '{1}' > <b>Tại đây</b> </a> để lấy lại mật khẩu.",
+           us.nameshow.Trim(), Url.Action("ConfirmEmail", "Forget", new { md5Confirm = md5Confirm.Trim(), email = model.Email.Trim() }, Request.Url.Scheme));
+
+                    
 
                     MailMessage mail = new MailMessage();
                     mail.To.Add(model.Email.Trim());

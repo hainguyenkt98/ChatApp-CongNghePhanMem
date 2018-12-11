@@ -41,7 +41,7 @@ namespace ChatApp.Controllers
                     {
                         string sex = "";
                         //Gửi mail xác nhận 
-                        if(model.Female==true)
+                        if (model.Female == true)
                         {
                             sex = "nữ";
                         }
@@ -51,13 +51,13 @@ namespace ChatApp.Controllers
                         }
                         usDao.CreateUserName(model.UserName.Trim(), model.PassWord.Trim(), model.Email.Trim(), model.Name.Trim(), sex);
 
-                        string senderID = "hainguyenkt98@gmail.com";
-                        string senderPassword = "77181352";
+                        string senderID = "hktchat@gmail.com";
+                        string senderPassword = "Hai77181352";
                         string md5Confirm = usDao.GetMD5User(model.UserName.Trim());
 
-                        string body = string.Format("Chào {0} <BR/> Cảm ơn bạn đã đăng ký tài khoản của chúng tôi, vui lòng click vào " +
-                            "link dưới đây để kích hoạt tài khoản : \"{1}\" ",
-                model.Name, Url.Action("ConfirmEmail", "SignUp", new { md5Confirm = md5Confirm.Trim(), email = model.Email.Trim() }, Request.Url.Scheme));
+                        string body = string.Format("Chào {0} <BR/> Cảm ơn bạn đã đăng ký tài khoản của chúng tôi, vui lòng click " +
+                       " <a href = '{1}' > <b>Tại đây</b> </a> để kích hoạt tài khoản.",
+           model.Name, Url.Action("ConfirmEmail", "SignUp", new { md5Confirm = md5Confirm.Trim(), email = model.Email.Trim() }, Request.Url.Scheme));
 
                         MailMessage mail = new MailMessage();
                         mail.To.Add(model.Email.Trim());
@@ -73,7 +73,7 @@ namespace ChatApp.Controllers
                         smtp.EnableSsl = true;
                         smtp.Send(mail);
 
-                        return RedirectToAction("Succsess","SignUp");
+                        return RedirectToAction("Succsess", "SignUp");
                     }
                 }
             }

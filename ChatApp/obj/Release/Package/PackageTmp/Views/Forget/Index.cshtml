@@ -1,14 +1,17 @@
-﻿@model ChatApp.Models.ChangePasswordModel
+﻿@model ChatApp.Models.ForgotPasswordModel
+@using BotDetect.Web.Mvc;
+
 @{
     Layout = null;
 }
+@{ MvcSimpleCaptcha forgetCapcha = new MvcSimpleCaptcha("ForgetCapcha"); }
 
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ConfirmEmail</title>
+    <title>Index</title>
     <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
     <!-- Latest compiled JavaScript -->
     <script src="~/Assets/JS/bootstrap.min.js"></script>
@@ -24,27 +27,24 @@
         </div>
         <div class="web-body">
             <div class="reg-form">
-                @using (Html.BeginForm("ChangePassword", "Forget", FormMethod.Post))
+                @using (Html.BeginForm("SendEmail", "Forget", FormMethod.Post))
                 {
                     @Html.AntiForgeryToken()
 
                     @Html.ValidationSummary(true, "", "error");
 
+                    if (ViewBag.Success != null)
+                    {
+                        <div class="alert alert-success">@ViewBag.Success</div>
+                    }
                     <div class="form-group has-feedback">
                         <span class="form-control-feedback"><i class="fas fa-envelope"></i></span>
-                        @Html.PasswordFor(Model => Model.OldPassword, htmlAttributes: new { @class = "form-control", @placeholder = "Mật khẩu cũ", @id = "oldpassword" })
-                        @Html.ValidationMessageFor(Model => Model.OldPassword, "", new { @class = "text-danger" })
+                        @Html.TextBoxFor(Model => Model.Email, htmlAttributes: new { @class = "form-control", @placeholder = "Email", @id = "email" })
+                        @Html.ValidationMessageFor(Model => Model.Email, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-group has-feedback">
-                        <span class="form-control-feedback"><i class="fas fa-envelope"></i></span>
-                        @Html.PasswordFor(Model => Model.NewPassword, htmlAttributes: new { @class = "form-control", @placeholder = "Mật khẩu mới", @id = "newpassword" })
-                        @Html.ValidationMessageFor(Model => Model.NewPassword, "", new { @class = "text-danger" })
-                    </div>
-                    <div class="form-group has-feedback">
-                        <span class="form-control-feedback"><i class="fas fa-envelope"></i></span>
-                        @Html.PasswordFor(Model => Model.NewPasswordConfirm, htmlAttributes: new { @class = "form-control", @placeholder = "Nhập lại mật khẩu mới", @id = "confirmnewpassword" })
-                        @Html.ValidationMessageFor(Model => Model.NewPasswordConfirm, "", new { @class = "text-danger" })
-                    </div>
+                    @Html.SimpleCaptcha(forgetCapcha)
+                    @Html.TextBox("CapchaCode")
+                    @Html.ValidationMessage("CapchaCode")
                     <button style="margin-top: 5px" type="submit" class="btn btn-primary" id="btn-signup">Xác nhận</button>
                 }
             </div>

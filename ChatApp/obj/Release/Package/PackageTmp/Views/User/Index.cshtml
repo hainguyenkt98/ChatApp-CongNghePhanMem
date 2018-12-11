@@ -37,7 +37,7 @@
                 @using (Html.BeginForm("Login", "User", FormMethod.Post))
                 {
                     @Html.ValidationSummary(false, "", "error");
-                    <form action="/action_page.php">
+                    <form action="">
                         <div class="form-group has-feedback">
                             <span class="form-control-feedback"><i class="fas fa-user"></i></span>
                             @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = "Tên tài khoản" })
@@ -49,10 +49,10 @@
                         <button type="submit" class="btn btn-primary" id="btn-signin">Đăng nhập</button>
                         <div class="form-bottom">
                             <span>
-                                <a href="HTML/sign-up.html">Đăng ký</a>
+                                <a href=@Url.Action("Index","SignUp")>Đăng ký</a>
                             </span>
                             <span style="float: right;">
-                                <a href="#">Quên mật khẩu?</a>
+                                <a href=@Url.Action("Index","Forget")>Quên mật khẩu?</a>
                             </span>
                         </div>
                     </form>
