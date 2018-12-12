@@ -232,6 +232,32 @@
         updateConnectionId(connectionId);//Cap nhat id vao db
         chat.server.SetupAllConversation(useridmain);// Khai bao cac group
 
+
+
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                var content = $('#messagecontent').val();
+                if (conversationidcurrent != "" && content.trim().length > 0) {
+                    chat.server.SendMessage(content, useridmain, conversationidcurrent);
+                    var currentdate = new Date();
+                    var s = '<li class="msg-right">'
+                        + '<div class="msg-left-sub">'
+                        + '<img src="' + pathimage + '">'
+                        + '<div class="msg-desc">'
+                        + content
+                        + '</div>'
+                        + '<small>' + currentdate.toLocaleString('en-GB') + '</small>'
+                        + '</div>'
+                        + '</li >';
+                    $('.right-chat .message.mCustomScrollbar ul').append(s);
+                    $('#messagecontent').val("");
+                    $('#messagecontent').focus();
+                    scrollBottom();
+                    resetConversation(conversationidcurrent, content, isGroup, pathimage, nameconversation, true);
+                }
+            }
+        });
+
         $('.btn-send').click(function () {
             //var useridcurrent;
             //var usersendmessage;

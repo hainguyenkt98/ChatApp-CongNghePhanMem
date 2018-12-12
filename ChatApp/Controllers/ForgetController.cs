@@ -37,7 +37,7 @@ namespace ChatApp.Controllers
                        " <a href = '{1}' > <b>Tại đây</b> </a> để lấy lại mật khẩu.",
            us.nameshow.Trim(), Url.Action("ConfirmEmail", "Forget", new { md5Confirm = md5Confirm.Trim(), email = model.Email.Trim() }, Request.Url.Scheme));
 
-                    
+
 
                     MailMessage mail = new MailMessage();
                     mail.To.Add(model.Email.Trim());
@@ -69,7 +69,7 @@ namespace ChatApp.Controllers
             UserDao userDao = new UserDao();
             if (ModelState.IsValid)
                 Session.Add("emailforget", email);
-            if(userDao.ConfirmEmail(md5Confirm.Trim(), email) != null)
+            if (userDao.ConfirmEmail(md5Confirm.Trim(), email) != null)
             {
                 return View();
             }
@@ -77,7 +77,7 @@ namespace ChatApp.Controllers
             {
                 return View("Index");
             }
-            
+
         }
         public ActionResult ChangePassword(ChangePasswordModel model)
         {
@@ -86,16 +86,10 @@ namespace ChatApp.Controllers
                 UserDao userDao = new UserDao();
                 tbUser us = userDao.GetUserFromEmail(Session["emailforget"].ToString().Trim());
 
-                if(us.password.Trim() == model.OldPassword.Trim())
-                {
-                    userDao.ChangePassword(Session["emailforget"].ToString().Trim(), model.NewPassword);
-                    Session["emailforget"] = null;
-                    return RedirectToAction("Succsess", "Forget");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Mật khẩu cũ không chính xác.");
-                }               
+                userDao.ChangePassword(Session["emailforget"].ToString().Trim(), model.NewPassword);
+                Session["emailforget"] = null;
+                return RedirectToAction("Succsess", "Forget");
+
             }
 
             return View("ConfirmEmail");

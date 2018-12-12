@@ -8,8 +8,6 @@ namespace ChatApp.Models
 {
     public class ChangePasswordModel
     {
-        [Required(ErrorMessage = "Nhập mật khẩu cũ.")]
-        public string OldPassword { get; set; }
 
         [Required(ErrorMessage = "Nhập mật khẩu mới.")]
         public string NewPassword { get; set; }
