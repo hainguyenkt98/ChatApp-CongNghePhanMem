@@ -1,7 +1,17 @@
 ﻿.alert.alert-success {
     text-align: center;
-    margin-top: 30%;
+    margin-top: 20%;
 }
-.alert.alert-success > a{
+
+.alert.alert-success > a {
+        margin-left: 5px;
+}
+
+.alert.alert-danger {
+    text-align: center;
+    margin-top: 20%;
+}
+
+.alert.alert-danger > a {
     margin-left: 5px;
 }

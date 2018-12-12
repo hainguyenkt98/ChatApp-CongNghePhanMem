@@ -71,5 +71,19 @@ namespace ChatApp.Controllers
             string usid = chatDao.getIdUserFromSingleConversation(conversationid, userid);
             return Json(usid, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public JsonResult GetFirstConversationOnline(string userid)
+        {
+            UserLogin usLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
+            List<string> list = chatDao.getListConversation2UserFirstOnline(usLogin.Id.Trim(), userid.Trim());
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+        [HttpPost]
+        public JsonResult GetLastConversationOffline(string userid)
+        {
+            UserLogin usLogin = (UserLogin)Session[CommonConstants.USER_SESSION];
+            List<string> list = chatDao.getListConversation2UserLastOffline(usLogin.Id.Trim(), userid.Trim());
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
     }
 }

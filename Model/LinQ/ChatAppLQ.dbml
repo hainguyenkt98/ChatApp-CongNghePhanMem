@@ -310,4 +310,16 @@
     <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
     <Return Type="System.Boolean" />
   </Function>
+  <Function Name="dbo.getConversationList2User" Method="getConversationList2User" IsComposable="true">
+    <Parameter Name="user1" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="user2" Type="System.String" DbType="NChar(10)" />
+    <ElementType Name="getConversationList2UserResult">
+      <Column Name="id" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.funcCheckIsFriendInGetConversation" Method="funcCheckIsFriendInGetConversation" IsComposable="true">
+    <Parameter Name="userid" Type="System.String" DbType="NChar(10)" />
+    <Parameter Name="conversationid" Type="System.String" DbType="NChar(10)" />
+    <Return Type="System.Boolean" />
+  </Function>
 </Database>

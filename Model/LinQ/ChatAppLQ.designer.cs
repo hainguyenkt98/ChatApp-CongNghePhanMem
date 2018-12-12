@@ -320,6 +320,18 @@ namespace Model.LinQ
 		{
 			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), conversationid, userid).ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getConversationList2User", IsComposable=true)]
+		public IQueryable<getConversationList2UserResult> getConversationList2User([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string user1, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string user2)
+		{
+			return this.CreateMethodCallQuery<getConversationList2UserResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), user1, user2);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.funcCheckIsFriendInGetConversation", IsComposable=true)]
+		public System.Nullable<bool> funcCheckIsFriendInGetConversation([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string userid, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NChar(10)")] string conversationid)
+		{
+			return ((System.Nullable<bool>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), userid, conversationid).ReturnValue));
+		}
 	}
 	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbAttachmment")]
@@ -3708,6 +3720,32 @@ namespace Model.LinQ
 				if ((this._isGroup != value))
 				{
 					this._isGroup = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getConversationList2UserResult
+	{
+		
+		private string _id;
+		
+		public getConversationList2UserResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id", DbType="NChar(10) NOT NULL", CanBeNull=false)]
+		public string id
+		{
+			get
+			{
+				return this._id;
+			}
+			set
+			{
+				if ((this._id != value))
+				{
+					this._id = value;
 				}
 			}
 		}

@@ -49,3 +49,11 @@ img#pictureUpload {
 .main-function .row {
     margin-top: 50px;
 }
+.change-password:hover {
+    text-decoration: underline;
+    color : darkblue;
+    cursor:pointer;
+}
+.change-password {
+    color: white;
+}

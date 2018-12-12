@@ -1617,6 +1617,7 @@
     <Content Include="Images\img-profile.png" />
     <Content Include="Images\logo.png" />
     <Content Include="Images\user.png" />
+    <Content Include="Images\warning.png" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
@@ -1631,6 +1632,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BlockFriendController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ForgetController.cs" />
     <Compile Include="Controllers\ListFriendController.cs" />
     <Compile Include="Controllers\ManageGroupChatController.cs" />
@@ -1674,6 +1676,7 @@
     <Content Include="Views\Forget\Index.cshtml" />
     <Content Include="Views\Forget\ConfirmEmail.cshtml" />
     <Content Include="Views\Forget\Succsess.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

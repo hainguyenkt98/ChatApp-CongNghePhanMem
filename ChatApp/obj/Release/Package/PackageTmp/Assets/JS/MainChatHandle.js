@@ -173,15 +173,43 @@
 
     chat.client.NotificationUserOnline = function (userid) {
         $(".onlineitem[data-userid=" + userid + "]").find('.img .fa.fa-circle.offline').removeClass('offline').addClass('online');
+
+        $.ajax(
+            {
+                url: "/MainChat/GetFirstConversationOnline",
+                data: { userid: userid },
+                dataType: "json",
+                type: "post",
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        $(".onlineitem[data-conversationid=" + result[i] + "]").find('.img .fa.fa-circle.offline').removeClass('offline').addClass('online');
+                    }
+                }
+            });
+
     }
     //Bat su kien online friend
     chat.client.NotificationUserOffline = function (userid) {
         $(".onlineitem[data-userid=" + userid + "]").find('.img .fa.fa-circle.online').removeClass('online').addClass('offline');
+
+        $.ajax(
+            {
+                url: "/MainChat/GetLastConversationOffline",
+                data: { userid: userid },
+                dataType: "json",
+                type: "post",
+                success: function (result) {
+                    for (var i = 0; i < result.length; i++) {
+                        $(".onlineitem[data-conversationid=" + result[i] + "]").find('.img .fa.fa-circle.online').removeClass('online').addClass('offline');
+                    }
+                }
+            });
     }
     //Bat su kien offline friend
 
     chat.client.SendMessage = function (content, userid, conversationid) {
         var presentConversationName = "";
+        var pathImageSenderUserInChat = "";
         var usersendmessage;
         pathImageSender;
         var element = $(".chatList[data-conversationid$=" + conversationid + "]");
@@ -189,9 +217,12 @@
             presentConversationName = "";
             usersendmessage = setCurrentPathImage(userid);
             pathImageSender = usersendmessage.PathImage;
+            pathImageSenderUserInChat = pathImageSender;
             element = $(".chatList[data-conversationid$=" + conversationid + "]");
         } else {
+            usersendmessage = setCurrentPathImage(userid);
             pathImageSender = "/Images/group.png";
+            pathImageSenderUserInChat = usersendmessage.PathImage;
         }
 
 
@@ -203,7 +234,7 @@
             var currentdate = new Date();
             var s = '<li class="msg-left">'
                 + '<div class="msg-left-sub">'
-                + '<img src="' + pathImageSender + '">'
+                + '<img src="' + pathImageSenderUserInChat + '">'
                 + '<div class="msg-desc">'
                 + content
                 + '</div>'
@@ -231,6 +262,32 @@
         var connectionId = $.connection.hub.id;
         updateConnectionId(connectionId);//Cap nhat id vao db
         chat.server.SetupAllConversation(useridmain);// Khai bao cac group
+
+
+
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                var content = $('#messagecontent').val();
+                if (conversationidcurrent != "" && content.trim().length > 0) {
+                    chat.server.SendMessage(content, useridmain, conversationidcurrent);
+                    var currentdate = new Date();
+                    var s = '<li class="msg-right">'
+                        + '<div class="msg-left-sub">'
+                        + '<img src="' + pathimage + '">'
+                        + '<div class="msg-desc">'
+                        + content
+                        + '</div>'
+                        + '<small>' + currentdate.toLocaleString('en-GB') + '</small>'
+                        + '</div>'
+                        + '</li >';
+                    $('.right-chat .message.mCustomScrollbar ul').append(s);
+                    $('#messagecontent').val("");
+                    $('#messagecontent').focus();
+                    scrollBottom();
+                    resetConversation(conversationidcurrent, content, isGroup, pathimage, nameconversation, true);
+                }
+            }
+        });
 
         $('.btn-send').click(function () {
             //var useridcurrent;

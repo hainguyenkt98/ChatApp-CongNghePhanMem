@@ -1,15 +1,12 @@
-﻿@model ChatApp.Models.SignUpModel
-@using BotDetect.Web.Mvc;
-@{
+﻿@{
     Layout = null;
 }
-@{ MvcSimpleCaptcha signupCapCha = new MvcSimpleCaptcha("SignupCapCha"); }
 <!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Success</title>
+    <title>Error</title>
 
     <link href="~/Assets/CSS/bootstrap.min.css" rel="stylesheet" />
     <!-- Latest compiled JavaScript -->
@@ -31,15 +28,15 @@
                 <div class="col-sm-3"></div>
                 <div class="col-sm-6 ">
                     <div class="logo-body column-in-center">
-                        <img class="logo" src="~/Images/logo.png">
+                        <img class="logo" src="~/Images/warning.png" />
                     </div>
                 </div>
                 <div class="col-sm-3"></div>
             </div>
         </div>
         <div class="web-body">
-            <div class="alert alert-success">
-                <strong>Đăng ký thành công!</strong> Vui lòng kiểm tra email để kích hoạt tài khoản.<a href="@Url.Action("Index","User")">Đăng nhập</a>
+            <div class="alert alert-danger">
+                <strong>Trang không tồn tại !.<a href="@Url.Action("Index","User")">Đăng nhập</a>
             </div>
         </div>
         <div class="footer">
